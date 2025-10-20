@@ -1,0 +1,1 @@
+// Desenvolva aqui a classe Monstro em JS
