@@ -18,10 +18,13 @@ Este exercício tem como objetivo praticar os conceitos fundamentais da Programa
 - [Funcionalidades Extra](#funcionalidades-extra)
 
 ## Objetivo Principal
-Desenvolver um jogo RPG de texto no arquivo `rpg.py`, contendo todas as classes pré existentes e:
-- Introdução a história do jogo, evidenciando o tema escolhido; 
-- Menus para interação com o usuário;
-- Pelos menos duas das cinco [Funcionalidades Extra](#funcionalidades-extra).
+Traduzir as classes do jogo RPyG para o JS:
+- Desenvolver as classes em JS nos arquivos `nome-da-classe.js` nas pastas `./itens` e `./personagens`;
+- Implementar um teste das classes no arquivo `teste.js`;  
+- Criar um menu para interação com o usuário no arquivo `RPyG.js`, possibilitando no mínimo:
+    - Escolher um nome para o herói;
+    - Iniciar batalha; (Aqui você pode ser criativo e fazer uma história complexa e interessante ou pode ser uma batalha simples, mas com no mínimo um monstro básico!)
+    - Sair.
 
 ## Como Fazer um Pull Request
 
@@ -151,7 +154,7 @@ Representa uma armadura que pode ser equipada.
 
 ## Funcionalidades Extra
 
-Para aprofundar seu conhecimento em POO e praticar o fluxo de trabalho Git/GitHub, além do [Objetivo Principal](#objetivo-principal), tente implementar pelo menos duas das seguintes funcionalidades:
+Para aprofundar seu conhecimento em POO e praticar o fluxo de trabalho Git/GitHub, além do [Objetivo Principal](#objetivo-principal), tente implementar algumas das seguintes funcionalidades:
 
 1.  **Sistema de Magias**: Crie uma nova classe `Magia` (subclasse de `Item` ou uma nova hierarquia) e adicione um método `lancar_magia(alvo)` à classe `Heroi`. Pense em como diferentes tipos de magia (dano, cura, buff) poderiam ser representados.
 2.  **Inventário Mais Complexo**: Implemente um sistema de inventário que tenha um limite de peso ou slots. O herói não poderia carregar infinitos itens.
