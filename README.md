@@ -1,6 +1,6 @@
 # RPyG
 
-Este exercício tem como objetivo praticar os conceitos fundamentais da Programação Orientada a Objetos (POO) em Python, utilizando um cenário de jogo de RPG (Role-Playing Game).
+Este exercício tem como objetivo praticar os conceitos fundamentais da Programação Orientada a Objetos (POO) em Python e JS, utilizando um cenário de jogo de RPG (Role-Playing Game).
 
 ![Dragões.jpg](dragoes.jpg)
 
