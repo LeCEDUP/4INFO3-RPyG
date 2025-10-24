@@ -1,8 +1,8 @@
-import { Personagem } from "./personagem";
+import { Personagem } from "./personagem.js";
 
 export class Monstro extends Personagem {
     constructor(nome, vida, ataque, defesa, tipo) {
-        super().this(nome,vida, ataque, defesa);
+        super(nome,vida, ataque, defesa);
         this.tipo = tipo;
     }
 }
