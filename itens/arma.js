@@ -1,1 +1,1 @@
-// Desenvolva aqui a classe Arma em JS
+// Desenvolva aqui a classe Arma em JSs
