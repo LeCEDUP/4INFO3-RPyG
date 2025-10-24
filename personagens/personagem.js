@@ -38,4 +38,16 @@ class Personagem {
         this.vida -= dano;
         if (this.vida <= 0) {
             this.vida = 0;
-        }console.log
+        }console.log{`${this.nome} recebeu ${dano} de dano. Vida restante: ${this.vida}`};
+        if (this.vida === 0) 
+            console.log(`${this.nome} foi derrotado!`);
+        else {
+            console.log(`${this.nome} recebeu ${dano} de dano. Vida restante: ${this.vida}`);
+        }
+
+        //     def esta_vivo(self):
+        // return self.vida > 0
+    
+        estaVivo() {
+        return this.vida > 0;
+    }
