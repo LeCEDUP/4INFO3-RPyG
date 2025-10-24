@@ -15,7 +15,7 @@ class Personagem {
         this.defesa = defesa;
     }
 
-    
+
     // def atacar(self, alvo):
     //     dano = max(0, self.ataque - alvo.defesa)
     //     alvo.receber_dano(dano)
@@ -26,7 +26,7 @@ class Personagem {
         alvo.receberDano(dano);
         console.log(`${this.nome} atacou ${alvo.nome} causando ${dano} de dano.`);
     }
-    
+
     // def receber_dano(self, dano):
     //     self.vida -= dano
     //     if self.vida <= 0:
@@ -38,16 +38,18 @@ class Personagem {
         this.vida -= dano;
         if (this.vida <= 0) {
             this.vida = 0;
-        }console.log{`${this.nome} recebeu ${dano} de dano. Vida restante: ${this.vida}`};
-        if (this.vida === 0) 
+        }
+        console.log(`${this.nome} recebeu ${dano} de dano. Vida restante: ${this.vida}`);
+        if (this.vida === 0)
             console.log(`${this.nome} foi derrotado!`);
         else {
             console.log(`${this.nome} recebeu ${dano} de dano. Vida restante: ${this.vida}`);
         }
+    }
 
-        //     def esta_vivo(self):
-        // return self.vida > 0
-    
+    // def esta_vivo(self):
+    //     return self.vida > 0
         estaVivo() {
-        return this.vida > 0;
+            return this.vida > 0;
+        }
     }
