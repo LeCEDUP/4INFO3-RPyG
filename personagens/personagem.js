@@ -30,6 +30,18 @@ class Personagem {
     }
 
     atacar(alvo) {
-        dano = 
+        let dano = Math.max(this.ataque - alvo.defesa)
+        alvo.receber_dano
     }
+
+    receber_dano(dano) {
+        this.vida -= dano;
+        if(this.vida <= 0) {
+            self.vida = 0;
+            console.log(`${this.nome} foi derrotado!`)
+        } else {
+            console.log(`${this.nome} recebeu ${dano}. Vida Restante: ${this.vida}`)
+        }
+    }
+    
 }
