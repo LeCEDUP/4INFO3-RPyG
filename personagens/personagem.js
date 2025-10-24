@@ -21,4 +21,8 @@ class Personagem {
             console.log(`${this.nome} recebeu ${dano}. Vida Restante: ${this.vida}`);
         }
     }
+
+    estaVivo() {
+        return this.vida > 0;
+    }
 }
