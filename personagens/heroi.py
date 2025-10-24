@@ -16,6 +16,7 @@ class Heroi(Personagem):
             self.subir_nivel()
 
     def subir_nivel(self):
+        
         self.nivel += 1
         self.vida += 20
         self.ataque += 5
