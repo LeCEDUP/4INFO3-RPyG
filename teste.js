@@ -1,8 +1,8 @@
-import { Personagem } from "./personagens/personagem";
-import { Monstro } from "./personagens/monstro";
+import { Personagem } from "./personagens/personagem.js";
+import { Monstro } from "./personagens/monstro.js";
 
 const arqueiro = new Personagem("arqueiro", 10, 50, 10);
 const cavaleiro = new Personagem("cavaleiro", 100, 30, 100);
-const dragao = new Monstro("dragao", 1000, 100, 500, "monstro")
+const dragao = new Monstro("dragao", 1000, 100, 5, "monstro")
 
-arqueiro.atacar(cavaleiro);
+arqueiro.atacar(dragao);
