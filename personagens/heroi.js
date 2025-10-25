@@ -1,8 +1,8 @@
 // Desenvolva aqui a classe Heroi em JS 
+import {personagem} from "./personagem.js";
+import {Arma} from "../itens/arma.js";
+import {Armadura} from "../itens/armadura.js";
 
-const Personagem = require('./personagem');
-const Arma = require('../itens/arma');
-const Armadura = require('../itens/armadura');
 
 class Heroi extends Personagem {
     constructor(nome, vida, ataque, defesa, nivel = 1, experiencia = 0, inventario = null) {

@@ -1,5 +1,5 @@
 // Desenvolva aqui a classe Arma em JS
-const Item = require('./item');
+import Item from './item';
 
 class arma extends Item {
     constructor( nome, descricao, bonus_ataque) {

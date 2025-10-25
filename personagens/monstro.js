@@ -1,5 +1,5 @@
 // Desenvolva aqui a classe Monstro em JS
-const Personagem = require('./personagem');
+import {personagem} from "./personagem.js";
 
 class Monstro extends Personagem {
     constructor(nome, ataque, defesa, vida, tipo) {

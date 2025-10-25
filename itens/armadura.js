@@ -1,5 +1,5 @@
 // Desenvolva aqui a classe Armadura em JS
-const Item = require('./item');
+import Item from './item';
 
 class Armadura extends Item {   
     constructor(nome, descricao, bonus_defesa) {
