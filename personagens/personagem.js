@@ -24,7 +24,8 @@
     //     return self.vida > 0
 
 
-class Personagem{
+
+export class Personagem{
     constructor(nome, vida, ataque, defesa) {
         this.nome = nome;
         this.vida = vida;
@@ -36,9 +37,9 @@ class Personagem{
         this.vida -= dano
         if (this.vida <= 0){
             this.vida = 0
-            console.log(`{this.nome} foi derrotado!`)}
+            console.log(`${this.nome} foi derrotado!`)}
         else{
-            console.log(`{this.nome} recebeu {dano} de dano. Vida restante: {self.vida}`)}
+            console.log(`${this.nome} recebeu ${dano} de dano. Vida restante: ${this.vida}`)}
 
 
     }
@@ -46,10 +47,11 @@ class Personagem{
     atacar(alvo){
         let dano = Math.max(0, (this.ataque - this.defesa))
         alvo.receber_dano(dano)
-        console.log(`${self.nome} atacou ${alvo.nome}, causando ${dano} de dano.`)
+        console.log(`${this.nome} atacou ${alvo.nome}, causando ${dano} de dano.`)
 
     }
-        esta_vivo(){
+    
+    esta_vivo(){
         return this.vida > 0
     }
         
