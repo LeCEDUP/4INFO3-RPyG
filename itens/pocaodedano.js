@@ -1,9 +1,8 @@
-importar { Item } de "./item.js";
+import { Item } from "./item.js";
 
-classe de exportação Pocao estende Item{
-    construtor(nome, descrição) {
-        super(nome, descrição);
-        isto.taxa = 25;
-        isto.dano = 4;
+export class PocaoDeDano extends Item {
+    constructor(nome, descricao, dano) {
+        super(nome, descricao);
+        this.dano = dano;
     }
 }
