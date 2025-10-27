@@ -1,6 +1,6 @@
 // Desenvolva aqui a classe Personagem em JS
 
-class Personagem {
+export class Personagem {
     constructor(nome, ataque, defesa, vida) {
         this.nome = nome;
         this.ataque = ataque;
@@ -29,4 +29,4 @@ class Personagem {
     };
 }
 
-exports = module.exports = Personagem;
+// exports = module.exports = Personagem;

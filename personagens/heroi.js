@@ -1,10 +1,11 @@
 // Desenvolva aqui a classe Heroi em JS 
-import {personagem} from "./personagem.js";
-import {Arma} from "../itens/arma.js";
-import {Armadura} from "../itens/armadura.js";
+import { Personagem } from "./personagem.js";
+import Arma from '../itens/arma.js';
+import { Armadura } from '../itens/armadura.js';
 
 
-class Heroi extends Personagem {
+
+export class Heroi extends Personagem {
     constructor(nome, vida, ataque, defesa, nivel = 1, experiencia = 0, inventario = null) {
         super(nome, ataque, defesa, vida);
         this.nivel = nivel;
@@ -46,5 +47,5 @@ class Heroi extends Personagem {
     }
 }
 
-module.exports = Heroi;
+
 
