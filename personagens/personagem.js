@@ -1,8 +1,8 @@
 export class Personagem {
     constructor(nome, vida, ataque, defesa){
         this.nome = nome;
-        this.vida = vida;
         this.ataque = ataque;
+        this.vida = vida;
         this.defesa = defesa;
     }
 

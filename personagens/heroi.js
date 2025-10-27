@@ -6,8 +6,8 @@ import { Armadura } from "../itens/armadura.js";
 // condição ? valorSeVerdadeiro : valorSeFalso;
 
 class Heroi extends Personagem {
-    constructor(nome, vida, ataque, defesa, nivel = 1, experiencia = 0, inventario = null) {
-        super(nome, vida, ataque, defesa);
+    constructor(nome, ataque, vida, defesa, nivel = 1, experiencia = 0, inventario = null) {
+        super(nome, ataque, vida, defesa);
         this.nivel = nivel;
         this.experiencia = experiencia;
         this.inventario = inventario != null ? inventario : [];
