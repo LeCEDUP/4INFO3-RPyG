@@ -5,7 +5,7 @@ import { Armadura } from "../itens/armadura.js";
 // let status = idade >= 18 ? "Adulto" : "Menor de idade";
 // condição ? valorSeVerdadeiro : valorSeFalso;
 
-class Heroi extends Personagem {
+export class Heroi extends Personagem {
     constructor(nome, ataque, vida, defesa, nivel = 1, experiencia = 0, inventario = null) {
         super(nome, ataque, vida, defesa);
         this.nivel = nivel;

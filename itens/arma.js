@@ -1,4 +1,4 @@
-import { Item } from "./item";
+import { Item } from "./item.js";
 
 export class Arma extends Item {
     constructor(nome, descricao, bonus_ataque) {
