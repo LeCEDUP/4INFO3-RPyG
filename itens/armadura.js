@@ -1,4 +1,4 @@
-// Desenvolva aqui a classe Armadura em JS
+
 import { Item } from './item.js';
 
 class Armadura extends Item {
