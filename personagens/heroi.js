@@ -1,4 +1,4 @@
-import { Personagem} from "./personagem.js";
+import { Personagem } from "./personagem.js";
 import { Arma } from "../itens/arma.js";
 import { Armadura } from "../itens/armadura.js";
 
@@ -6,7 +6,7 @@ import { Armadura } from "../itens/armadura.js";
 // condição ? valorSeVerdadeiro : valorSeFalso;
 
 class Heroi extends Personagem {
-    constructor(nome, vida, ataque, defesa, nivel=1, experiencia=0, inventario=null) {
+    constructor(nome, vida, ataque, defesa, nivel = 1, experiencia = 0, inventario = null) {
         super(nome, vida, ataque, defesa);
         this.nivel = nivel;
         this.experiencia = experiencia;
@@ -29,24 +29,19 @@ class Heroi extends Personagem {
         self.experiencia -= (this.nivel - 1) * 100;
         console.log(`${this.nome} subiu para o nível ${this.nivel}! Seus atributos aumentaram.`)
     }
-
-    // def equipar_item(self, item):
-    //     if item in self.inventario:
-    //         if isinstance(item, Arma):
-    //             self.ataque += item.bonus_ataque
-    //             print(f"{self.nome} equipou {item.nome}. Ataque atual: {self.ataque}")
-    //         elif isinstance(item, Armadura):
-    //             self.defesa += item.bonus_defesa
-    //             print(f"{self.nome} equipou {item.nome}. Defesa atual: {self.defesa}")
-    //         else:
-    //             print(f"{item.nome} não pode ser equipado.")
-    //     else:
-    //         print(f"{self.nome} não possui {item.nome} no inventário.")
-
+    
     equiparItem(item) {
-        if(item in this.inventario) {
+        if (item in this.inventario) {
             if (item instanceof Arma) {
-                
+                this.ataque += item.bonus_ataque
+                console.log(`${this.nome} equipou ${item.nome}.
+                    Ataque atual: ${this.ataque}`)
+            } else if (item instanceof Armadura) {
+                this.defesa += item.bonus_defesa
+                console.log(`${this.nome} equipou ${item.nome}.
+                    Defesa atual: ${this.defesa}`)
+            } else {
+                console.log(`${this.nome} não possui ${item.nome} no inventário.`)
             }
         }
     }
