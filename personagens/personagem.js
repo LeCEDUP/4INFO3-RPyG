@@ -34,9 +34,9 @@ export class Personagem{
     }
 
     receber_dano(dano){
-        this.vida -= dano
+        this.vida -= dano;
         if (this.vida <= 0){
-            this.vida = 0
+            this.vida = 0;
             console.log(`${this.nome} foi derrotado!`)}
         else{
             console.log(`${this.nome} recebeu ${dano} de dano. Vida restante: ${this.vida}`)}
@@ -46,13 +46,19 @@ export class Personagem{
 
     atacar(alvo){
         let dano = Math.max(0, (this.ataque - this.defesa))
-        alvo.receber_dano(dano)
+        alvo.receber_dano(dano);
         console.log(`${this.nome} atacou ${alvo.nome}, causando ${dano} de dano.`)
 
     }
     
     esta_vivo(){
-        return this.vida > 0
+        if (this.vida > 0){
+            return`${this.name} está vivo.`
+        }
+        else{
+            return`${this.name} está morto.`
+        }
+        // return this.vida > 0
     }
         
 }

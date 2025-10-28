@@ -1,8 +1,9 @@
 // Desenvolva aqui a classe Armadura em JS
+import {Item} from './item.js';
 
-class Armadura extends Item{
-    constructor(self, nome, descricao, bonus_defesa){
-        super().__init__(nome, descricao)
-        self.bonus_defesa = bonus_defesa
+export class Armadura extends Item{
+    constructor(nome, descricao, bonus_defesa){
+        super(nome, descricao);
+        this.bonus_defesa = bonus_defesa;
     }
 }

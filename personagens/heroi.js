@@ -32,23 +32,23 @@
     //             print(f"{item.nome} não pode ser equipado.")
     //     else:
     //         print(f"{self.nome} não possui {item.nome} no inventário.")
-import { Personagem } from "./personagens/personagem.js";
-import { Arma } from ".itens/arma.js";
-import { Armadura } from ".itens/armadura.js";
-import { Item } from ".itens/item.js";
+import { Personagem } from "./personagem.js";
+import { Arma } from "../itens/arma.js";
+import { Armadura } from "../itens/armadura.js";
 
 
 export class Heroi extends Personagem{
-    constructor(nome, vida, ataque, defesa, nivel=1, experiencia=0, inventario=None){
+    constructor(nome, vida, ataque, defesa, nivel=1, experiencia=0, inventario=null){
         super(nome, vida, ataque, defesa)
         this.nivel = nivel
         this.experiencia = experiencia
-        this.inventario = inventario }
+        this.inventario = inventario
+    }
 
     ganhar_experiencia(exp){
         this.experiencia += exp
         console.log(`${this.nome} ganhou ${exp} de experiência. Total: ${this.experiencia}`)
-        while (experiencia >= this.nivel * 100){
+        while (this.experiencia >= this.nivel * 100){
         this.subir_nivel()
         }
     }
@@ -56,8 +56,8 @@ export class Heroi extends Personagem{
 subir_nivel(){
         this.nivel += 1
         this.vida += 20
-        this.ataque += 5
-        this.defesa += 2
+        this.ataque += 10
+        this.defesa += 
         this.experiencia -= (this.nivel - 1) * 100
         console.log(`${this.nome} subiu para o nível ${this.nivel}! Seus atributos aumentaram.`)}
 
