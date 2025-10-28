@@ -22,6 +22,10 @@ export class Personagem {
         }
     }
 
+    exibirInformacoes() {
+        console.log(`${this.nome} tem ${this.vida} de vida, ${this.ataque} de ataque, ${this.defesa} de defesa.`)
+    }
+
     estaVivo() {
         return this.vida > 0;
     }
