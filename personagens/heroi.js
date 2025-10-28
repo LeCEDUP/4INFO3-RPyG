@@ -53,7 +53,7 @@ export class Heroi extends Personagem{
         }
     }
 
-subir_nivel(){
+    subir_nivel(){
         this.nivel += 1
         this.vida += 20
         this.ataque += 10
@@ -61,7 +61,7 @@ subir_nivel(){
         this.experiencia -= (this.nivel - 1) * 100
         console.log(`${this.nome} subiu para o nível ${this.nivel}! Seus atributos aumentaram.`)}
 
-equipar_item(item){
+    equipar_item(item){
         if(item in this.inventario){
             if(isinstance(item, Arma)){
                 this.ataque += item.bonus_ataque
