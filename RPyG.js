@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+// Desenvolva aqui o menu para interagir com o usuário em JS
+
+>>>>>>> 63c23c6144b4c16e2364372577d9f234c7388b0f
 import { Heroi } from "./heroi.js";
 import { Monstro } from "./monstro.js";
 import { Arma } from "./arma.js";
@@ -10,7 +15,11 @@ function iniciarBatalha(heroi, monstro) {
 
     while (heroi.estaVivo() && monstro.estaVivo()) {
         console.log(`\n--- Rodada ${rodada++} ---`);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 63c23c6144b4c16e2364372577d9f234c7388b0f
         // Herói ataca
         heroi.atacar(monstro);
         if (!monstro.estaVivo()) break;
@@ -36,12 +45,20 @@ function main() {
 
     // Criação do Herói
     const heroi = new Heroi("Conan", 100, 15, 5);
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 63c23c6144b4c16e2364372577d9f234c7388b0f
     // Criação de Itens e Inventário
     const espada = new Arma("Espada do Poder", "Uma espada que brilha.", 10);
     const armadura = new Armadura("Armadura de Placas", "Proteção pesada.", 8);
     heroi.inventario.push(espada, armadura);
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 63c23c6144b4c16e2364372577d9f234c7388b0f
     // Equipa itens iniciais
     heroi.equiparItem(espada);
     heroi.equiparItem(armadura);
