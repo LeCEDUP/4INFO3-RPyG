@@ -1,6 +1,10 @@
-from .item import Item
+import { Item } from './item.js';
 
-class Arma(Item):
-    def __init__(self, nome, descricao, bonus_ataque):
-        super().__init__(nome, descricao)
-        self.bonus_ataque = bonus_ataque
+class Arma extends Item {
+  constructor(nome, descricao, bonusAtaque) {
+    super(nome, descricao);
+    this.bonusAtaque = bonusAtaque;
+  }
+}
+
+export { Arma };
