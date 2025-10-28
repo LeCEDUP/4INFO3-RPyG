@@ -36,7 +36,7 @@ class Monstro extends Personagem {
 const heroi = new Personagem("Herói", 100, 20);
 const dragao = new Monstro("Dragão", 150, 25);
 
-console.log("🔥 Início da batalha! 🔥\n");
+console.log(" Início da batalha! \n");
 
 while (heroi.estaVivo() && dragao.estaVivo()) {
   heroi.atacar(dragao);
