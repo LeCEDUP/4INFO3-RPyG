@@ -8,7 +8,7 @@ export class Personagem {
     }
 
     atacar(alvo){
-       dano = max(0, this.ataque - alvo.defesa)
+       let dano = Math.max(0, (this.ataque - alvo.defesa))
        alvo.receber_dano(dano)
        console.log(`${this.nome} atacou ${alvo.nome} causando ${dano} de dano.`) 
     }
