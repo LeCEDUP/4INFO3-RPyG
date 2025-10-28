@@ -23,7 +23,7 @@ function batalha() {
             if (heroi.inventario.length === 0) {
                 console.log("Sem itens!");
             } else {
-                heroi.usarItem(0, heroi); // só usa o primeiro item
+                heroi.usarItem(0, heroi); 
             }
         } else {
             console.log("Opção inválida!");

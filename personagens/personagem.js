@@ -1,27 +1,34 @@
-class Personagem {
-#vida;
-
-  constructor(nome, vida) {
+export class Personagem {
+  constructor(nome, vida, forca) {
     this.nome = nome;
-    this.#vida = vida; 
+    this.vida = vida;
+    this.forca = forca;
   }
 
-  
-  get vida() {
-    return this.#vida;
+  atacar(alvo) {
+    console.log(`${this.nome} ataca ${alvo.nome}!`);
+    alvo.receberDano(this.forca);
   }
 
- 
   receberDano(dano) {
-    this.#vida = Math.max(0, this.#vida - dano);
+    this.vida -= dano;
+    if (this.vida <= 0) {
+      this.vida = 0;
+      console.log(`${this.nome} foi derrotado!`);
+    } else {
+      console.log(`${this.nome} recebeu ${dano} de dano e agora tem ${this.vida} de vida.`);
+    }
+  }
+
+  estaVivo() {
+    return this.vida > 0;
   }
 }
 
-
 const heroi = new Personagem("Herói", 100);
 
-console.log(`${heroi.nome} tem ${heroi.vida} de vida.`); // Herói tem 100 de vida.
+console.log(`${heroi.nome} tem ${heroi.vida} de vida.`); 
 heroi.receberDano(30);
-console.log(`${heroi.nome} agora tem ${heroi.vida} de vida.`); // Herói agora tem 70 de vida.
+console.log(`${heroi.nome} agora tem ${heroi.vida} de vida.`); 
 heroi.receberDano(100);
-console.log(`${heroi.nome} agora tem ${heroi.vida} de vida.`); // Herói agora tem 0 de vida.
+console.log(`${heroi.nome} agora tem ${heroi.vida} de vida.`); 
