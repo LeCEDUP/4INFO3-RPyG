@@ -31,18 +31,19 @@ export class Heroi extends Personagem {
     }
     
     equiparItem(item) {
+        this.inventario.push(item);
         if (item in this.inventario) {
             if (item instanceof Arma) {
-                this.ataque += item.bonus_ataque
+                this.ataque += item.bonusAtaque;
                 console.log(`${this.nome} equipou ${item.nome}.
-                    Ataque atual: ${this.ataque}`)
+                    Ataque atual: ${this.ataque}`);
             } else if (item instanceof Armadura) {
-                this.defesa += item.bonus_defesa
+                this.defesa += item.bonusDefesa;
                 console.log(`${this.nome} equipou ${item.nome}.
-                    Defesa atual: ${this.defesa}`)
+                    Defesa atual: ${this.defesa}`);
+                }
             } else {
                 console.log(`${this.nome} não possui ${item.nome} no inventário.`)
-            }
         }
     }
 }
