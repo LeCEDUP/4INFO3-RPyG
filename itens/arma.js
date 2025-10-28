@@ -1,5 +1,4 @@
-
-import { Item } from 
+import { Item } from './item.js';
 
 class Arma extends Item {
   constructor(nome, descricao, bonusAtaque) {
@@ -7,3 +6,7 @@ class Arma extends Item {
     this.bonusAtaque = bonusAtaque;
   }
 }
+
+export { Arma };
+
+

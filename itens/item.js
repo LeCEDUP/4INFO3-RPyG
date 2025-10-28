@@ -1,8 +1,9 @@
-class Item {
+export class Item {
   constructor(nome, descricao) {
     this.nome = nome;
     this.descricao = descricao;
   }
 }
 
-export { Item };
+
+
