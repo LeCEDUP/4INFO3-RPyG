@@ -16,4 +16,34 @@ export class Monstro extends Personagem{
     }
 }
 
-// let caio = new Monstro('Caio', 5000, 300, 2000, 'Lesma')
+
+
+export class Dragao extends Monstro{
+    constructor(nome, vida, ataque, defesa, nivel=1, experiencia=0){
+        super(nome, vida, ataque, defesa, nivel, experiencia)
+        this.nome = nome;
+        this.vida = 150;
+        this.ataque = 100;
+        this.defesa = 90;
+                }
+            }
+
+export class Espectro extends Monstro{
+    constructor(nome, vida, ataque, defesa, nivel=1, experiencia=0){
+        super(nome, vida, ataque, defesa, nivel, experiencia)
+        this.nome = nome;
+        this.vida = 70;
+        this.ataque = 95;
+        this.defesa = 60;
+    }
+}
+
+export class Vampiro extends Monstro{
+    constructor(nome, vida, ataque, defesa, nivel=1, experiencia=0){
+        super(nome, vida, ataque, defesa, nivel, experiencia)
+        this.nome = nome;
+        this.vida = 90;
+        this.ataque = 105;
+        this.defesa = 70;
+    }
+}

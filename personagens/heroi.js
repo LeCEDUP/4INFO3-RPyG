@@ -78,3 +78,35 @@ export class Heroi extends Personagem{
             console.log(`${this.nome} não possui ${item.nome} no inventário.`)}
     }
 }
+
+
+
+export class Cavaleiro extends Heroi{
+                constructor(nome, vida, ataque, defesa, nivel=1, experiencia=0, inventario=null){
+                    super(nome, vida, ataque, defesa, nivel, experiencia, inventario)
+                    this.nome = nome;
+                    this.vida = 120;
+                    this.ataque = 70;
+                    this.defesa = 100;
+                }
+            }
+
+export class Mago extends Heroi{
+                constructor(nome, vida, ataque, defesa, nivel=1, experiencia=0, inventario=null){
+                    super(nome, vida, ataque, defesa, nivel, experiencia, inventario)
+                    this.nome = nome;
+                    this.vida = 80;
+                    this.ataque = 110;
+                    this.defesa = 60;
+                }
+            }
+
+export class Arqueiro extends Heroi{
+                constructor(nome, vida, ataque, defesa, nivel=1, experiencia=0, inventario=null){
+                    super(nome, vida, ataque, defesa, nivel, experiencia, inventario)
+                    this.nome = nome;
+                    this.vida = 90;
+                    this.ataque = 85;
+                    this.defesa = 70;
+                }
+            }
