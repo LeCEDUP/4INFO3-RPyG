@@ -1,10 +1,6 @@
-import { Item } from './item.js';
+from .item import Item
 
-class Armadura extends Item {
-  constructor(nome, descricao, bonusDefesa) {
-    super(nome, descricao);
-    this.bonusDefesa = bonusDefesa;
-  }
-}
-
-export { Armadura };
+class Armadura(Item):
+    def __init__(self, nome, descricao, bonus_defesa):
+        super().__init__(nome, descricao)
+        self.bonus_defesa = bonus_defesa
