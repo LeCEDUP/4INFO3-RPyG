@@ -1,1 +1,6 @@
-// Desenvolva aqui a classe Item em JS
+export class item{
+    constructor(nome, descrição){
+        this.nome = nome;
+        this.descrição = descrição;
+    }
+}
