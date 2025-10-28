@@ -12,8 +12,8 @@ let caio = new Monstro('Caio', 5000, 30, 2000, 'Lesma')
 
 //HEROI
 console.log(leandro.atacar(caio));
-console.log(caio.esta_vivo());
+console.log(caio.esta_vivo(caio));
 
 //MONSTRO
 console.log(caio.atacar(leandro));
-console.log(leandro.esta_vivo());
+console.log(leandro.esta_vivo(leandro));
