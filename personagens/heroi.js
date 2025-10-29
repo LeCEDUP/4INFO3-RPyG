@@ -38,11 +38,11 @@ import { Armadura } from "../itens/armadura.js";
 
 
 export class Heroi extends Personagem{
-    constructor(nome, vida, ataque, defesa, nivel=1, experiencia=0, inventario=null){
+    constructor(nome, vida, ataque, defesa, nivel=1, experiencia=0){
         super(nome, vida, ataque, defesa)
         this.nivel = nivel
         this.experiencia = experiencia
-        this.inventario = inventario
+        this.inventario = []
     }
 
     ganhar_experiencia(exp){
@@ -62,12 +62,12 @@ export class Heroi extends Personagem{
         console.log(`${this.nome} subiu para o nível ${this.nivel}! Seus atributos aumentaram.`)}
 
     equipar_item(item){
-        if(item in this.inventario){
-            if(isinstance(item, Arma)){
+        if(this.inventario.includes(item)){
+            if(item instanceof Arma){
                 this.ataque += item.bonus_ataque
                 console.log(`${this.nome} equipou ${item.nome}. Ataque atual: ${this.ataque}`)}
                 
-            else if(isinstance(item, Armadura)){
+            else if(item instanceof Armadura){
                 this.defesa += item.bonus_defesa
                 console.log(`${this.nome} equipou ${item.nome}. Defesa atual: ${this.defesa}`)}
 

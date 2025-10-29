@@ -16,20 +16,20 @@ export class Cajado extends Arma {}
 
 // Armas 
 export const espadas = [
-    new Espada("Espada de Ferro", "Uma lâmina simples e confiável.", 10),
-    new Espada("Espada Flamejante", "Forjada nas chamas de um vulcão.", 20),
-    new Espada("Lâmina do Rei Caído", "Espada amaldiçoada, envolta em trevas.", 35)
+    new Espada("Espada de Ferro", "Uma lâmina simples e confiável.", 25),
+    new Espada("Espada Flamejante", "Forjada nas chamas de um vulcão.", 50),
+    new Espada("Lâmina do Rei Caído", "Espada amaldiçoada, envolta em trevas.", 80)
 ];
 
 export const arcos = [
-    new Arco("Arco de Carvalho", "Arco rústico e resistente.", 8),
-    new Arco("Arco Élfico", "Leve, preciso e silencioso.", 18),
-    new Arco("Arco das Sombras", "Arma sombria que dispara flechas negras.", 30)
+    new Arco("Arco de Carvalho", "Arco rústico e resistente.", 30),
+    new Arco("Arco Élfico", "Leve, preciso e silencioso.", 50),
+    new Arco("Arco das Sombras", "Arma sombria que dispara flechas negras.", 65)
 ];
 
 export const cajados = [
-    new Cajado("Cajado de Carvalho Antigo", "Canaliza magia natural.", 9),
-    new Cajado("Cajado Arcano", "Amplifica poder elemental.", 22),
-    new Cajado("Cajado do Vazio", "Concentra energia proibida.", 40)
+    new Cajado("Cajado de Carvalho Antigo", "Canaliza magia natural.", 20),
+    new Cajado("Cajado Arcano", "Amplifica poder elemental.", 35),
+    new Cajado("Cajado do Vazio", "Concentra energia proibida.", 50)
 ];
 

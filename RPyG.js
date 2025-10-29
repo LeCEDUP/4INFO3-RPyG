@@ -2,6 +2,7 @@
 import * as readline from "readline-sync";
 
 import { espadas, arcos, cajados } from "./itens/arma.js";
+import { armadurasCavaleiro, armadurasArqueiro, tunicasMago} from "./itens/armadura.js"
 
 import { Monstro } from "./personagens/monstro.js";
 import { Dragao } from "./personagens/monstro.js";
@@ -62,11 +63,14 @@ function escolhaClasse(escolha_classe){
         console.log("Você escolheu a classe Herói! Prepare-se para defender o reino com coragem e honra.");
         console.log();
         let classe_heroi = "";
+        let personagem_principal = "";
 
         const escolha_classe_heroi = readline.questionInt("Digite o numero que corresponde a sua escolha de heroi: ");
         
         if (escolha_classe_heroi === 1){
             let classe_cavaleiro = new Cavaleiro(readline.question("Digite o nome do seu heroi: "));
+            personagem_principal = classe_cavaleiro
+
             classe_heroi = "Cavaleiro";
 
             console.log(`Muito bem, ${classe_cavaleiro.nome}. Você escolheu a classe ${classe_heroi}! Forte, leal e imbatível na espada. Você começará sua jornada com Vida: ${classe_cavaleiro.vida}, Ataque: ${classe_cavaleiro.ataque}, Defesa: ${classe_cavaleiro.defesa}.`);
@@ -74,6 +78,8 @@ function escolhaClasse(escolha_classe){
 
         else if (escolha_classe_heroi === 2){
             let classe_mago = new Mago(readline.question("Digite o nome do seu heroi: "));
+            personagem_principal = classe_mago
+
             classe_heroi = "Mago";
 
             console.log(`Muito bem, ${classe_mago.nome}. Você escolheu a classe ${classe_heroi}! Mestre dos elementos e da sabedoria arcana. Você começará sua jornada com Vida: ${classe_mago.vida}, Ataque: ${classe_mago.ataque}, Defesa: ${classe_mago.defesa}.`);
@@ -81,6 +87,8 @@ function escolhaClasse(escolha_classe){
 
         else if (escolha_classe_heroi === 3){
             let classe_arqueiro = new Arqueiro(readline.question("Digite o nome do seu heroi: "));
+            personagem_principal = classe_arqueiro
+
             classe_heroi = "Arqueiro";
 
             console.log(`Muito bem, ${classe_arqueiro.nome}. Você escolheu a classe ${classe_heroi}! Silencioso, veloz e mortal à distância. Você começará sua jornada com Vida: ${classe_arqueiro.vida}, Ataque: ${classe_arqueiro.ataque}, Defesa: ${classe_arqueiro.defesa}.`);
@@ -90,6 +98,7 @@ function escolhaClasse(escolha_classe){
             console.log("Escolha inválida! Por favor, reinicie o jogo e selecione uma opção válida.");
             return;
         }
+
 
 
 
@@ -108,10 +117,41 @@ function escolhaClasse(escolha_classe){
             }
         }
         
+
+
         const arma = gerarArma(classe_heroi);
+
+        personagem_principal.inventario.push(arma)
 
         console.log(`Você recebeu uma arma: ${arma.nome} - ${arma.descricao} (Bônus de Ataque: ${arma.bonus_ataque})`);
         console.log();
+        
+        // console.log(personagem_principal.inventario)
+
+
+
+        function gerarArmadura(classe_heroi) {
+            if (classe_heroi === "Cavaleiro") {
+                return armadurasCavaleiro[Math.floor(Math.random() * armadurasCavaleiro.length)];
+            } else if (classe_heroi === "Arqueiro") {
+                return armadurasArqueiro[Math.floor(Math.random() * armadurasArqueiro.length)];
+            } else if (classe_heroi === "Mago") {
+                return tunicasMago[Math.floor(Math.random() * tunicasMago.length)];
+            } else {
+                return null;
+            }
+        }
+
+
+
+        const armadura = gerarArmadura(classe_heroi);
+
+        console.log(`Você recebeu uma armadura: ${armadura.nome} - ${armadura.descricao} (Bônus de Ataque: ${armadura.bonus_defesa})`);
+        console.log();
+
+        personagem_principal.inventario.push(armadura)
+
+        console.log(personagem_principal.inventario)
     }
 
 
@@ -179,8 +219,68 @@ function escolhaClasse(escolha_classe){
 }
 escolhaClasse(escolha_classe);
 
+//
+// export class Cavaleiro extends Heroi{
+//                 constructor(nome, vida, ataque, defesa, nivel=1, experiencia=0, inventario=null){
+//                     super(nome, vida, ataque, defesa, nivel, experiencia, inventario)
+//                     this.nome = nome;
+//                     this.vida = 120;
+//                     this.ataque = 70;
+//                     this.defesa = 100;
+//                 }
+//             }
+let pedro = new Cavaleiro("Cavaleiro Pedro Augusto")
+console.log(`Atributos PEDRO antes dos itens: ${pedro.nome, pedro.vida, pedro.ataque, pedro.defesa}`)
+const armaPedro = espadas[2]
+const armaduraPedro = armadurasCavaleiro[2]
+pedro.inventario = [armaPedro, armaduraPedro]
 
+pedro.equipar_item(armaPedro)
+pedro.equipar_item(armaduraPedro)
 
+console.log(pedro.inventario)
+console.log(`Atributos PEDRO depois dos itens: ${pedro.nome, pedro.vida, pedro.ataque, pedro.defesa}`)
+// export class Mago extends Heroi{
+//                 constructor(nome, vida, ataque, defesa, nivel=1, experiencia=0, inventario=null){
+//                     super(nome, vida, ataque, defesa, nivel, experiencia, inventario)
+//                     this.nome = nome;
+//                     this.vida = 80;
+//                     this.ataque = 110;
+//                     this.defesa = 60;
+//                 }
+//             }
+let miguel = new Mago("Mago Miguel")
+console.log(`Atributos MIGUEL antes dos itens: ${miguel.nome, miguel.vida, miguel.ataque, miguel.defesa}`)
+const armaMiguel = cajados[2]
+const armaduraMiguel = tunicasMago[2]
+miguel.inventario = [armaMiguel, armaduraMiguel]
+
+miguel.equipar_item(armaMiguel)
+miguel.equipar_item(armaduraMiguel)
+
+console.log(miguel.inventario)
+console.log(`Atributos MIGUEL depois dos itens: ${miguel.nome, miguel.vida, miguel.ataque, miguel.defesa}`)
+// export class Arqueiro extends Heroi{
+//                 constructor(nome, vida, ataque, defesa, nivel=1, experiencia=0, inventario=null){
+//                     super(nome, vida, ataque, defesa, nivel, experiencia, inventario)
+//                     this.nome = nome;
+//                     this.vida = 90;
+//                     this.ataque = 85;
+//                     this.defesa = 70;
+//                 }
+//             }
+//
+let caio = new Arqueiro("Arqueiro Caio")
+console.log(`Atributos CAIO antes dos itens: ${caio.nome, caio.vida, caio.ataque, caio.defesa}`)
+const armaCaio = arcos[2]
+const armaduraCaio = armadurasArqueiro[2]
+caio.inventario = [armaCaio, armaduraCaio]
+
+caio.equipar_item(armaCaio)
+caio.equipar_item(armaduraCaio)
+
+console.log(caio.inventario)
+console.log(`Atributos CAIO depois dos itens: ${caio.nome, caio.vida, caio.ataque, caio.defesa}`)
 
 
 

@@ -53,12 +53,12 @@ export class Personagem{
     
     esta_vivo(){
         if (this.vida > 0){
-            return`${this.name} está vivo.`
+            console.log(`${this.nome} está vivo.`)
         }
         else{
-            return`${this.name} está morto.`
+            console.log(`${this.nome} está morto.`)
         }
-        // return this.vida > 0
+        return this.vida > 0
     }
         
 }
