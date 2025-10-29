@@ -27,6 +27,11 @@ export class Personagem {
     }
 
     estaVivo() {
-        return this.vida > 0;
+        if (this.vida > 0) {
+            return true;
+        }
+        if (this.vida < 0) {
+            return true;
+        }
     }
 }

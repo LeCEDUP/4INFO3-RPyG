@@ -23,27 +23,27 @@ export class Heroi extends Personagem {
 
     subirNivel() {
         this.nivel += 1;
-        this.vida += 20;
-        this.ataque += 5;
+        this.vida += 10;
+        this.ataque += 10;
         this.defesa += 2;
         self.experiencia -= (this.nivel - 1) * 100;
         console.log(`${this.nome} subiu para o nível ${this.nivel}! Seus atributos aumentaram.`)
     }
     
     equiparItem(item) {
-        this.inventario.push(item);
-        if (item in this.inventario) {
+        if (this.inventario.includes(item)) {
             if (item instanceof Arma) {
                 this.ataque += item.bonusAtaque;
                 console.log(`${this.nome} equipou ${item.nome}.
                     Ataque atual: ${this.ataque}`);
-            } else if (item instanceof Armadura) {
+            } 
+            else if (item instanceof Armadura) {
                 this.defesa += item.bonusDefesa;
                 console.log(`${this.nome} equipou ${item.nome}.
                     Defesa atual: ${this.defesa}`);
-                }
-            } else {
-                console.log(`${this.nome} não possui ${item.nome} no inventário.`)
+            }
+        } else {
+            console.log(`${this.nome} não possui ${item.nome} no inventário.`)
         }
     }
 }
