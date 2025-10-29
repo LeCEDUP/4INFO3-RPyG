@@ -18,39 +18,6 @@ import { Cavaleiro } from "./personagens/heroi.js";
 import { Mago } from "./personagens/heroi.js";
 import { Arqueiro } from "./personagens/heroi.js";
 
-// //================================================================================
-// //NPCs Heróis
-// let npcCavaleiro = new Cavaleiro("Cavaleiro Pedro Augusto")
-// const armaNpcCavaleiro = espadas[2]
-// const armaduraNpcCavaleiro = armadurasCavaleiro[2]
-// npcCavaleiro.inventario = [armaNpcCavaleiro, armaduraNpcCavaleiro]
-// // npcCavaleiro.equipar_item(armaNpcCavaleiro)
-// // npcCavaleiro.equipar_item(armaduraNpcCavaleiro)
-// //---------------------------------------------------------------------------------             
-// let npcMago = new Mago("Mago Miguel")
-// const armaNpcMago = cajados[2]
-// const armaduraNpcMago = tunicasMago[2]
-// npcMago.inventario = [armaNpcMago, armaduraNpcMago]
-// // npcMago.equipar_item(armaNpcMago)
-// // npcMago.equipar_item(armaduraNpcMago)
-// //---------------------------------------------------------------------------------
-// let npcArqueiro = new Arqueiro("Arqueiro Caio")
-// const armaNpcArqueiro = arcos[2]
-// const armaduraNpcArqueiro = armadurasArqueiro[2]
-// npcArqueiro.inventario = [armaNpcArqueiro, armaduraNpcArqueiro]
-// // npcArqueiro.equipar_item(armaNpcArqueiro)
-// // npcArqueiro.equipar_item(armaduraNpcArqueiro)
-// //================================================================================
-
-//================================================================================
-//NPCs Monstros
-// let npcDragao = new Dragao("Dragão Ancião")
-// let npcEspectro = new Espectro("Fantasma da Babilônia")
-// let npcVampiro = new Vampiro("Vampiro Nosferatu")
-//================================================================================
-// export {npcCavaleiro, npcMago, npcArqueiro, npcDragao, npcEspectro, npcVampiro};
-
-// console.log("npcCavaleiro:", npcCavaleiro.nome, npcCavaleiro.vida, npcCavaleiro.ataque, npcCavaleiro.defesa);
 
 const banner_inicial = `
 ╔═════════════════════════════════════════════════╗
@@ -73,6 +40,55 @@ const banner_escolha = `
 console.log(banner_escolha);
 let escolha_classe = readline.questionInt("Digite o numero que corresponde a sua escolha: ");
 console.log();
+
+let personagem_principal = "";
+let classe_heroi = "";
+let classe_monstro = "";
+let arma_heroi = "";
+let armadura_heroi = "";
+let monstro_inimigo = "";
+let heroi_inimigo = "";
+
+function gerarArma(c_h) {
+    if (c_h === "Cavaleiro") {
+        return espadas[Math.floor(Math.random() * espadas.length)];
+    } 
+    else if (c_h === "Arqueiro") {
+        return arcos[Math.floor(Math.random() * arcos.length)];
+    } 
+    else if (c_h === "Mago") {
+        return cajados[Math.floor(Math.random() * cajados.length)];
+    } 
+    else {
+        return null;
+    }
+}
+
+function gerarArmadura(classe_heroi) {
+    if (classe_heroi === "Cavaleiro") {
+        return armadurasCavaleiro[Math.floor(Math.random() * armadurasCavaleiro.length)];
+    } else if (classe_heroi === "Arqueiro") {
+        return armadurasArqueiro[Math.floor(Math.random() * armadurasArqueiro.length)];
+    } else if (classe_heroi === "Mago") {
+        return tunicasMago[Math.floor(Math.random() * tunicasMago.length)];
+    } else {
+        return null;
+    }
+}
+
+function gerarMonstroAleatorio() {
+    const indice = Math.floor(Math.random() * monstros_lista.length);
+    const monstro_inimigo = monstros_lista[indice];
+
+    return monstro_inimigo;
+}
+
+function gerarHeroiAleatorio(){
+    const indice = Math.floor(Math.random() * herois_lista.length);
+    const heroi_inimigo = herois_lista[indice];
+
+    return heroi_inimigo;
+}
 
 function escolhaClasse(escolha_classe){
     if (escolha_classe === 1) {
@@ -100,8 +116,6 @@ function escolhaClasse(escolha_classe){
         console.log();
         console.log("=================================================================================================")
         console.log()
-        let classe_heroi = "";
-        let personagem_principal = "";
 
         const escolha_classe_heroi = readline.questionInt("Digite o numero que corresponde a sua escolha de heroi: ");
         
@@ -143,23 +157,6 @@ function escolhaClasse(escolha_classe){
         console.log("=================================================================================================")
         console.log();
 
-
-
-
-        function gerarArma(c_h) {
-            if (c_h === "Cavaleiro") {
-                return espadas[Math.floor(Math.random() * espadas.length)];
-            } 
-            else if (c_h === "Arqueiro") {
-                return arcos[Math.floor(Math.random() * arcos.length)];
-            } 
-            else if (c_h === "Mago") {
-                return cajados[Math.floor(Math.random() * cajados.length)];
-            } 
-            else {
-                return null;
-            }
-        }
         const arma = gerarArma(classe_heroi);
 
         personagem_principal.inventario.push(arma)
@@ -168,20 +165,7 @@ function escolhaClasse(escolha_classe){
         console.log();
         
         // console.log(personagem_principal.inventario)
-
-
-
-        function gerarArmadura(classe_heroi) {
-            if (classe_heroi === "Cavaleiro") {
-                return armadurasCavaleiro[Math.floor(Math.random() * armadurasCavaleiro.length)];
-            } else if (classe_heroi === "Arqueiro") {
-                return armadurasArqueiro[Math.floor(Math.random() * armadurasArqueiro.length)];
-            } else if (classe_heroi === "Mago") {
-                return tunicasMago[Math.floor(Math.random() * tunicasMago.length)];
-            } else {
-                return null;
-            }
-        }
+        
         const armadura = gerarArmadura(classe_heroi);
 
         console.log(`Você recebeu uma armadura escolhida pelos deuses: ${armadura.nome} - ${armadura.descricao} (Bônus de Defesa: ${armadura.bonus_defesa})`);
@@ -226,17 +210,6 @@ function escolhaClasse(escolha_classe){
         console.log(`Sua aventura começa agora, ${personagem_principal.nome} o ${classe_heroi}! Que a sorte esteja ao seu favor!`);
         //================================================================================
         
-        function gerarMonstroAleatorio() {
-            const indice = Math.floor(Math.random() * monstros_lista.length);
-            const monstro_inimigo = monstros_lista[indice];
-
-            console.log(`
-        👹 Um ${monstro_inimigo.nome} apareceu!
-         -> Vida: ${monstro_inimigo.vida} | Ataque: ${monstro_inimigo.ataque} | Defesa: ${monstro_inimigo.defesa}
-            `);
-
-            return monstro_inimigo;
-        }
         const monstroInimigo = gerarMonstroAleatorio();
 
         console.log();
@@ -246,7 +219,7 @@ function escolhaClasse(escolha_classe){
             -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
             
             Você está em seus aposentos no castelo da rainha Letícia II, apreciando a vista do horizonte quando de repente, um mensageiro ofegante entra correndo.
-            "Herói, um ${monstroInimigo.nome} está atacando a vila próxima! Precisamos de sua ajuda!" ele exclama.
+            "Herói, um monstro está atacando a vila próxima! Precisamos de sua ajuda!" ele exclama.
             Com determinação, você se levanta, pega sua ${arma.nome} e veste sua ${armadura.nome}, e parte em direção à vila para enfrentar o perigo.
             Chegando lá, você vê o ${monstroInimigo.nome} causando destruição. É hora de agir!
             `);
@@ -279,7 +252,6 @@ function escolhaClasse(escolha_classe){
         console.log("Você escolheu a classe Monstro! Prepare-se para semear o caos e a destruição.");
         console.log();
 
-        let personagem_principal = "";
 
         const escolha_classe_monstro = readline.questionInt("Digite o numero que corresponde a sua escolha de monstro: ");
 
@@ -312,18 +284,7 @@ function escolhaClasse(escolha_classe){
             console.log("Escolha inválida! Por favor, selecione uma opção válida.");
         }
 
-        function gerarHeroiAleatorio() {
-    const indice = Math.floor(Math.random() * herois_lista.length);
-    const heroi_inimigo = herois_lista[indice];
-
-    console.log(`
-    Um herói surgiu no campo de batalha!
-    ${heroi_inimigo.nome}
-    Vida: ${heroi_inimigo.vida} | ⚔️ Ataque: ${heroi_inimigo.ataque} | 🛡️ Defesa: ${heroi_inimigo.defesa}
-    `);
-
-    return heroi_inimigo;
-    }
+   //sasasasasasas
 
     const heroiInimigo = gerarHeroiAleatorio();
     console.log();
@@ -346,7 +307,7 @@ function escolhaClasse(escolha_classe){
 
     else if(escolha_classe_monstro === 3){
         console.log(`Você, ${personagem_principal.nome}, nasceu em uma nobre família de vampiros. Desde jovem, você foi treinado nas artes do combate e da sedução, tornando-se um guerreiro formidável. No entanto, certo dia, um exército de caçadores de vampiros atacaram a sua família. Durante o ataque, você foi gravemente ferido e deixado para morrer. Por um milagre, você foi acolhido por um grupo de vampiros nômades, que cuidaram de suas feridas e o ajudaram a recuperar suas forças.
-    Numa época dificil, seu grupo começou a passar fome, você então avista um pequeno vilarejo humano e decide atacar para saciar a fome do seu grupo. Quando você chega ao vilarejo, você é confrontado por ${heroiInimigo.nome}, um herói local, que jurou proteger os aldeões de qualquer ameaça, incluindo você.
+    Numa época dificil, seu grupo começou a passar fome, você então avista um pequeno vilarejo humano e decide atacar para saciar a fome do seu grupo. Quando você chega ao vilarejo, você é confrontado pelo ${heroiInimigo.nome}, um herói local, que jurou proteger os aldeões de qualquer ameaça, incluindo você.
         `);
     }
     
@@ -365,6 +326,96 @@ function escolhaClasse(escolha_classe){
 }
 escolhaClasse(escolha_classe);
 
+
+
+
+// 🎯 Função de batalha épica
+function iniciarBatalha(personagem_principal, oponente, classe_jogador) {
+    console.log(`
+═══════════════════════════════════════════════════════════════════════
+⚔️  A BATALHA COMEÇA!
+${personagem_principal.nome} VS ${oponente.nome}
+═══════════════════════════════════════════════════════════════════════
+    `);
+
+    let turno = 1;
+
+    while (personagem_principal.esta_vivo() && oponente.esta_vivo()) {
+        console.log(`\n🔷 TURNO ${turno} 🔷`);
+        console.log("-------------------------------------------------------------");
+
+        // Ataque do jogador
+        console.log(`💥 ${personagem_principal.nome} parte para o ataque!`);
+        personagem_principal.atacar(oponente);
+
+        if (!oponente.esta_vivo()) break;
+
+        // Ataque do oponente
+        console.log(`\n🛡️ ${oponente.nome} contra-ataca!`);
+        oponente.atacar(personagem_principal);
+
+        turno++;
+        console.log("-------------------------------------------------------------");
+    }
+
+    console.log("\n═══════════════════════════════════════════════════════════════");
+
+    // 💀 Se o jogador morreu
+    if (!personagem_principal.esta_vivo()) {
+        console.log(`\n💔 ${personagem_principal.nome} foi derrotado por ${oponente.nome}...\n`);
+
+        if (classe_jogador === "Dragão") {
+            console.log("🐉 Você foi derrotado pelo herói, envergonhando o nome dos dragões, guardiões do mundo...");
+        } 
+        else if (classe_jogador === "Espectro") {
+            console.log("💀 Você foi derrotado pelo herói, não conseguiu sua vingança e acabou caindo nas profundezas do submundo...");
+        } 
+        else if (classe_jogador === "Vampiro") {
+            console.log("🦇 Você foi derrotado pelo herói... seu grupo esperava por sua volta, enquanto a fome os matava um por um...");
+        } 
+        else {
+            console.log("😢 Você lutou bravamente, mas o destino foi cruel desta vez...");
+        }
+
+        console.log("\n═══════════════════════════════════════════════════════════════");
+        return;
+    }
+
+    // 🏆 Se o jogador venceu
+    else if (!oponente.esta_vivo()) {
+        console.log(`\n🏆 ${personagem_principal.nome} derrotou ${oponente.nome}!\n`);
+
+        if (classe_jogador === "Dragão") {
+            console.log("🔥 Você derrotou o herói e, após isso, devastou o mundo dos humanos, cobrindo tudo em chamas eternas!");
+        } 
+        else if (classe_jogador === "Espectro") {
+            console.log("👻 Você derrotou o herói e concluiu sua vingança, eliminando todos aqueles que trouxeram dor e agonia ao seu povo...");
+        } 
+        else if (classe_jogador === "Vampiro") {
+            console.log("🩸 Você derrotou o herói e retornou triunfante ao seu grupo, trazendo saciedade e esperança aos seus irmãos famintos...");
+        } 
+        else {
+            console.log("🌟 A vitória é sua! O reino celebra o nome do herói que triunfou sobre o mal!");
+            if (personagem_principal.ganhar_experiencia) {
+                personagem_principal.ganhar_experiencia(100);
+            }
+        }
+
+        console.log("\n═══════════════════════════════════════════════════════════════");
+        return;
+    }
+}
+
+
+
+if (escolha_classe === 1) {
+    const monstroInimigo = gerarMonstroAleatorio();
+    iniciarBatalha(personagem_principal, monstroInimigo, classe_heroi);
+} 
+else if (escolha_classe === 2) {
+    const heroiInimigo = gerarHeroiAleatorio();
+    iniciarBatalha(personagem_principal, heroiInimigo, personagem_principal.constructor.name);
+}
 
 
 

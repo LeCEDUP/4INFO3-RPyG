@@ -85,9 +85,9 @@ export class Cavaleiro extends Heroi{
                 constructor(nome, vida, ataque, defesa, nivel=1, experiencia=0, inventario=null){
                     super(nome, vida, ataque, defesa, nivel, experiencia, inventario)
                     this.nome = nome;
-                    this.vida = 120;
-                    this.ataque = 70;
-                    this.defesa = 100;
+                    this.vida = 140;
+                    this.ataque = 90;
+                    this.defesa = 130;
                 }
             }
 
@@ -95,9 +95,9 @@ export class Mago extends Heroi{
                 constructor(nome, vida, ataque, defesa, nivel=1, experiencia=0, inventario=null){
                     super(nome, vida, ataque, defesa, nivel, experiencia, inventario)
                     this.nome = nome;
-                    this.vida = 80;
-                    this.ataque = 110;
-                    this.defesa = 60;
+                    this.vida = 100;
+                    this.ataque = 125;
+                    this.defesa = 70;
                 }
             }
 
@@ -105,9 +105,9 @@ export class Arqueiro extends Heroi{
                 constructor(nome, vida, ataque, defesa, nivel=1, experiencia=0, inventario=null){
                     super(nome, vida, ataque, defesa, nivel, experiencia, inventario)
                     this.nome = nome;
-                    this.vida = 90;
-                    this.ataque = 85;
-                    this.defesa = 70;
+                    this.vida = 110;
+                    this.ataque = 105;
+                    this.defesa = 90;
                 }
             }
 
@@ -119,8 +119,8 @@ import { espadas } from "../itens/arma.js";
 import { armadurasCavaleiro } from "../itens/armadura.js";
 
 let npcCavaleiro = new Cavaleiro("Cavaleiro Pedro Augusto")
-const armaNpcCavaleiro = espadas[2]
-const armaduraNpcCavaleiro = armadurasCavaleiro[2]
+const armaNpcCavaleiro = espadas[1]
+const armaduraNpcCavaleiro = armadurasCavaleiro[1]
 npcCavaleiro.inventario = [armaNpcCavaleiro, armaduraNpcCavaleiro]
 npcCavaleiro.equipar_item(armaNpcCavaleiro)
 npcCavaleiro.equipar_item(armaduraNpcCavaleiro)
@@ -129,8 +129,8 @@ import { cajados } from "../itens/arma.js";
 import { tunicasMago } from "../itens/armadura.js";
 
 let npcMago = new Mago("Mago Miguel")
-const armaNpcMago = cajados[2]
-const armaduraNpcMago = tunicasMago[2]
+const armaNpcMago = cajados[1]
+const armaduraNpcMago = tunicasMago[1]
 npcMago.inventario = [armaNpcMago, armaduraNpcMago]
 npcMago.equipar_item(armaNpcMago)
 npcMago.equipar_item(armaduraNpcMago)
@@ -139,8 +139,8 @@ import { arcos } from "../itens/arma.js";
 import { armadurasArqueiro } from "../itens/armadura.js";
 
 let npcArqueiro = new Arqueiro("Arqueiro Caio")
-const armaNpcArqueiro = arcos[2]
-const armaduraNpcArqueiro = armadurasArqueiro[2]
+const armaNpcArqueiro = arcos[1]
+const armaduraNpcArqueiro = armadurasArqueiro[1]
 npcArqueiro.inventario = [armaNpcArqueiro, armaduraNpcArqueiro]
 npcArqueiro.equipar_item(armaNpcArqueiro)
 npcArqueiro.equipar_item(armaduraNpcArqueiro)

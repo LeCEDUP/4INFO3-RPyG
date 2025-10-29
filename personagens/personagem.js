@@ -44,12 +44,31 @@ export class Personagem{
 
     }
 
-    atacar(alvo){
-        let dano = Math.max(0, (this.ataque - this.defesa))
-        alvo.receber_dano(dano);
-        console.log(`${this.nome} atacou ${alvo.nome}, causando ${dano} de dano.`)
+    // atacar(alvo){
+    //     let dano = Math.max(0, (this.ataque - this.defesa))
+    //     alvo.receber_dano(dano);
+    //     console.log(`${this.nome} atacou ${alvo.nome}, causando ${dano} de dano.`)
 
-    }
+    // }
+
+//     atacar(alvo) {
+//     let variacao = Math.floor(Math.random() * 11) - 5; // -5 até +5
+//     let danoBase = this.ataque - alvo.defesa;
+//     let dano = Math.max(0, danoBase + variacao);
+//     alvo.receber_dano(dano);
+//     console.log(`${this.nome} atacou ${alvo.nome}, causando ${dano} de dano.`);
+// }
+
+    atacar(alvo) {
+
+    let danoBase = this.ataque - (alvo.defesa * 0.5);
+    let variacao = Math.floor(Math.random() * 21) - 10;
+    let dano = Math.max(1, Math.floor(danoBase + variacao));
+
+    alvo.receber_dano(dano);
+    console.log(`${this.nome} atacou ${alvo.nome}, causando ${dano} de dano!`);
+}
+
     
     esta_vivo(){
         if (this.vida > 0){

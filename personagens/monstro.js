@@ -22,9 +22,9 @@ export class Dragao extends Monstro{
     constructor(nome, vida, ataque, defesa, nivel=1, experiencia=0){
         super(nome, vida, ataque, defesa, nivel, experiencia)
         this.nome = nome;
-        this.vida = 150;
-        this.ataque = 100;
-        this.defesa = 90;
+        this.vida = 200;
+        this.ataque = 110;
+        this.defesa = 160;
                 }
             }
 
@@ -34,9 +34,9 @@ export class Espectro extends Monstro{
     constructor(nome, vida, ataque, defesa, nivel=1, experiencia=0){
         super(nome, vida, ataque, defesa, nivel, experiencia)
         this.nome = nome;
-        this.vida = 70;
-        this.ataque = 95;
-        this.defesa = 60;
+        this.vida = 120;
+        this.ataque = 100;
+        this.defesa = 70;
     }
 }
 
@@ -45,9 +45,9 @@ export class Vampiro extends Monstro{
     constructor(nome, vida, ataque, defesa, nivel=1, experiencia=0){
         super(nome, vida, ataque, defesa, nivel, experiencia)
         this.nome = nome;
-        this.vida = 90;
+        this.vida = 160;
         this.ataque = 105;
-        this.defesa = 70;
+        this.defesa = 80;
     }
 }
 
