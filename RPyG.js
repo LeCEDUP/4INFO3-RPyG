@@ -1,112 +1,148 @@
-<<<<<<< HEAD
-=======
-// Desenvolva aqui o menu para interagir com o usuário em JS
+// RPyG.js
+import readline from "readline";
+import Heroi from "./personagens/heroi.js";
+import Monstro from "./personagens/monstro.js";
+import Arma from "./itens/arma.js";
+import Armadura from "./itens/armadura.js";
 
->>>>>>> 63c23c6144b4c16e2364372577d9f234c7388b0f
-import { Heroi } from "./heroi.js";
-import { Monstro } from "./monstro.js";
-import { Arma } from "./arma.js";
-import { Armadura } from "./armadura.js";
+// === SETUP DO CONSOLE ===
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 
-// Função para simular a batalha
-function iniciarBatalha(heroi, monstro) {
-    console.log(`\n--- Batalha: ${heroi.nome} vs ${monstro.nome} ---`);
-    let rodada = 1;
+let heroi = null;
 
-    while (heroi.estaVivo() && monstro.estaVivo()) {
-        console.log(`\n--- Rodada ${rodada++} ---`);
-<<<<<<< HEAD
+// === MONSTROS ALEATÓRIOS ===
+function gerarMonstro() {
+  const tipos = [
+    new Monstro("Goblin", "Pequeno", 40, 8, 2),
+    new Monstro("Lobo", "Pequeno", 35, 10, 1),
+    new Monstro("Orc", "Médio", 70, 12, 3),
+    new Monstro("Troll", "Grande", 120, 18, 5)
+  ];
 
-=======
-        
->>>>>>> 63c23c6144b4c16e2364372577d9f234c7388b0f
-        // Herói ataca
-        heroi.atacar(monstro);
-        if (!monstro.estaVivo()) break;
-
-        // Monstro ataca
-        monstro.atacar(heroi);
-    }
-
-    if (heroi.estaVivo()) {
-        console.log(`\n*** VITÓRIA! ${heroi.nome} derrotou o ${monstro.nome}! ***`);
-        // Herói ganha uma quantidade fixa de XP
-        heroi.ganharExperiencia(150); 
-    } else {
-        console.log(`\n*** DERROTA! ${heroi.nome} foi derrotado pelo ${monstro.nome}. ***`);
-    }
+  return tipos[Math.floor(Math.random() * tipos.length)];
 }
 
-// Função principal do jogo
-function main() {
-    console.log("===================================");
-    console.log("        Bem-vindo ao RPyG!         ");
-    console.log("===================================");
+// === COMBATE ===
+function batalha(monstro) {
+  console.log(`\n🔥 Um ${monstro.nome} apareceu!`);
 
-    // Criação do Herói
-    const heroi = new Heroi("Conan", 100, 15, 5);
-<<<<<<< HEAD
+  let turno = 1;
+  while (heroi.estaVivo() && monstro.estaVivo()) {
+    console.log(`\n--- Turno ${turno} ---`);
 
-=======
-    
->>>>>>> 63c23c6144b4c16e2364372577d9f234c7388b0f
-    // Criação de Itens e Inventário
-    const espada = new Arma("Espada do Poder", "Uma espada que brilha.", 10);
-    const armadura = new Armadura("Armadura de Placas", "Proteção pesada.", 8);
-    heroi.inventario.push(espada, armadura);
-<<<<<<< HEAD
+    const resHeroi = heroi.atacar(monstro);
+    console.log(`${heroi.nome} causa ${resHeroi.dano} de dano. Vida do monstro: ${monstro.vida}/${monstro.maxVida}`);
 
-=======
-    
->>>>>>> 63c23c6144b4c16e2364372577d9f234c7388b0f
-    // Equipa itens iniciais
+    if (!monstro.estaVivo()) {
+      console.log(`✅ ${monstro.nome} foi derrotado!`);
+      const exp = monstro.experienciaAoDerrotar();
+      heroi.ganharExperiencia(exp);
+      console.log(`⭐ Experiência: +${exp} | Nível: ${heroi.nivel}\n`);
+      return;
+    }
+
+    const resMonstro = monstro.atacar(heroi);
+    console.log(`${monstro.nome} causa ${resMonstro.dano} de dano! Vida do herói: ${heroi.vida}/${heroi.maxVida}`);
+
+    if (!heroi.estaVivo()) {
+      console.log(`💀 ${heroi.nome} foi derrotado...`);
+      console.log(`GAME OVER`);
+      process.exit();
+    }
+
+    turno++;
+  }
+}
+
+// === FUNÇÕES PARA MENU ===
+function mostrarStatus() {
+  console.log(`
+📋 STATUS DO HERÓI:
+Nome: ${heroi.nome}
+Vida: ${heroi.vida}/${heroi.maxVida}
+Ataque: ${heroi.calcularAtaqueTotal()}
+Defesa: ${heroi.calcularDefesaTotal()}
+Nível: ${heroi.nivel}
+Exp: ${heroi.experiencia}
+`);
+}
+
+function mostrarInventario() {
+  if (heroi.inventario.length === 0) {
+    console.log("Inventário vazio!");
+    return;
+  }
+
+  console.log("\n🎒 INVENTÁRIO:");
+  heroi.inventario.forEach((item, i) => {
+    console.log(`${i + 1} - ${item.nome}`);
+  });
+}
+
+function explorar() {
+  console.log("\nVocê está explorando...");
+  batalha(gerarMonstro());
+}
+
+
+// === MENU PRINCIPAL ===
+function menu() {
+  console.log(`
+=========================
+🎮 MENU RPG
+1 - Ver Status
+2 - Inventário
+3 - Explorar
+4 - Sair
+=========================
+`);
+
+  rl.question("Escolha uma opção: ", (op) => {
+    switch (op) {
+      case "1":
+        mostrarStatus();
+        break;
+
+      case "2":
+        mostrarInventario();
+        break;
+
+      case "3":
+        explorar();
+        break;
+
+      case "4":
+        console.log("Saindo do jogo...");
+        process.exit();
+
+      default:
+        console.log("Opção inválida!");
+    }
+    menu();
+  });
+}
+
+
+// === INICIALIZAÇÃO DO JOGO ===
+function iniciarJogo() {
+  rl.question("Digite o nome do seu herói: ", (nome) => {
+    heroi = new Heroi(nome);
+
+    // Itens iniciais
+    const espada = new Arma("Espada Curta", "Simples, mas útil", 5);
+    const couraca = new Armadura("Armadura de Couro", "Proteção básica", 3);
+
+    heroi.adicionarAoInventario(espada);
+    heroi.adicionarAoInventario(couraca);
     heroi.equiparItem(espada);
-    heroi.equiparItem(armadura);
+    heroi.equiparItem(couraca);
 
-    // Criação do Monstro
-    const monstro = new Monstro("Lobo Gigante", 60, 12, 3, "Animal");
-
-    let opcao = 0;
-    while (opcao !== 3) {
-        console.log("\n--- Menu Principal ---");
-        console.log(`Herói: ${heroi.nome} (Nível ${heroi.nivel}, Vida: ${heroi.vida})`);
-        console.log("1. Iniciar Batalha (Contra Lobo Gigante)");
-        console.log("2. Ver Status do Herói");
-        console.log("3. Sair");
-
-        // Simulação de entrada do usuário (em um ambiente real, usaria 'prompt' ou 'readline')
-        // Para o propósito deste exercício, vamos simular a sequência de ações.
-        if (opcao === 0) {
-            opcao = 1; // Primeira ação: Iniciar Batalha
-        } else if (opcao === 1) {
-            opcao = 2; // Segunda ação: Ver Status
-        } else if (opcao === 2) {
-            opcao = 3; // Terceira ação: Sair
-        }
-
-        switch (opcao) {
-            case 1:
-                // Recria o monstro para uma nova batalha
-                const novoMonstro = new Monstro(monstro.nome, monstro.vida, monstro.ataque, monstro.defesa, monstro.tipo);
-                iniciarBatalha(heroi, novoMonstro);
-                break;
-            case 2:
-                console.log("\n--- Status do Herói ---");
-                console.log(`Nome: ${heroi.nome}`);
-                console.log(`Nível: ${heroi.nivel}`);
-                console.log(`Experiência: ${heroi.experiencia}`);
-                console.log(`Vida: ${heroi.vida}`);
-                console.log(`Ataque: ${heroi.ataque}`);
-                console.log(`Defesa: ${heroi.defesa}`);
-                console.log(`Inventário: ${heroi.inventario.map(item => item.nome).join(", ")}`);
-                break;
-            case 3:
-                console.log("\nObrigado por jogar RPyG! Até a próxima.");
-                break;
-            default:
-                console.log("Opção inválida. Tente novamente.");
-        }
-    }
+    console.log(`\nHerói criado: ${heroi.nome}! A aventura começa...\n`);
+    menu();
+  });
 }
 
-main();
+iniciarJogo();

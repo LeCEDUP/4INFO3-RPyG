@@ -1,28 +1,31 @@
-export class Personagem {
-    constructor(nome, vida, ataque, defesa) {
-        this.nome = nome;
-        this.vida = vida;
-        this.ataque = ataque;
-        this.defesa = defesa;
-    }
+// Desenvolva aqui a classe Personagem em JS
 
-    atacar(alvo) {
-        const dano = Math.max(0, this.ataque - alvo.defesa);
-        alvo.receberDano(dano);
-        console.log(`${this.nome} atacou ${alvo.nome} causando ${dano} de dano.`);
-    }
+export default class Personagem {
+  constructor(nome, vida = 100, ataque = 10, defesa = 5) {
+    this.nome = nome;
+    this.maxVida = vida;
+    this.vida = vida;
+    this.ataque = ataque;
+    this.defesa = defesa;
+  }
 
-    receberDano(dano) {
-        this.vida -= dano;
-        if (this.vida <= 0) {
-            this.vida = 0;
-            console.log(`${this.nome} foi derrotado!`);
-        } else {
-            console.log(`${this.nome} recebeu ${dano} de dano. Vida restante: ${this.vida}`);
-        }
-    }
+  estaVivo() {
+    return this.vida > 0;
+  }
 
-    estaVivo() {
-        return this.vida > 0;
-    }
+  receberDano(dano) {
+    const danoRecebido = Math.max(0, dano);
+    this.vida = Math.max(0, this.vida - danoRecebido);
+    return danoRecebido;
+  }
+
+  atacar(alvo) {
+    if (!this.estaVivo()) return { sucesso: false, motivo: `${this.nome} está derrotado.` };
+
+    // cálculo base: ataque - defesa do alvo (defesa do alvo deve ser já refletida)
+    const danoBruto = this.ataque;
+    const danoFinal = Math.max(0, danoBruto - (alvo.defesa || 0));
+    const danoAplicado = alvo.receberDano(danoFinal);
+    return { sucesso: true, dano: danoAplicado };
+  }
 }
