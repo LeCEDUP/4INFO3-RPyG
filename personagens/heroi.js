@@ -1,5 +1,6 @@
 import { Personagem } from "./personagem.js";
 import { Monstro } from "./monstro.js";
+import { Arma } from "../itens/arma.js";
 
 export class Heroi extends Personagem{
     constructor(nome, vida, ataque, defesa, taxaCritica=0, danoCritico=1, inventario = []){
@@ -27,6 +28,42 @@ export class Heroi extends Personagem{
         alvo.receberDano(dano);
         console.log(`${this.nome} atacou ${alvo.nome} causando ${dano} de dano.`);
     }
+
+    ganharExperiencia(exp) {
+  this.experiencia += exp;
+  console.log(`${this.nome} ganhou ${exp} de experiência. Total: ${this.experiencia}`);
+
+  while (this.experiencia >= this.nivel * 100) {
+    this.subirNivel();
+  }
+}
+
+subirNivel() {
+  this.nivel += 1;
+  this.vida += 20;
+  this.ataque += 5;
+  this.defesa += 2;
+  this.experiencia -= (this.nivel - 1) * 100;
+
+  console.log(`${this.nome} subiu para o nível ${this.nivel}! Seus atributos aumentaram.`);
+}
+
+
+    equiparItem(item) {
+    if (this.inventario.includes(item)) {
+      if (item instanceof Arma) {
+        this.ataque += item.bonusAtaque;
+        console.log(`${this.nome} equipou ${item.nome}. Ataque atual: ${this.ataque}`);
+      } else if (item instanceof Armadura) {
+        this.defesa += item.bonusDefesa;
+        console.log(`${this.nome} equipou ${item.nome}. Defesa atual: ${this.defesa}`);
+      } else {
+        console.log(`${item.nome} não pode ser equipado.`);
+      }
+    } else {
+      console.log(`${this.nome} não possui ${item.nome} no inventário.`);
+    }
+  }
 }
 
 
@@ -48,32 +85,5 @@ if (heroi.estaVivo()) {
   console.log(`${heroi.nome} venceu!`);
 } else {
   console.log(`${dragao.nome} venceu!`);
-}
-
-class Heroi {
-  constructor(nome, vida, ataque, defesa) {
-    this.nome = nome;
-    this.vida = vida;
-    this.ataque = ataque;
-    this.defesa = defesa;
-    this.inventario = [];
-  }
-
-  
-  equiparItem(item) {
-    if (this.inventario.includes(item)) {
-      if (item instanceof Arma) {
-        this.ataque += item.bonusAtaque;
-        console.log(`${this.nome} equipou ${item.nome}. Ataque atual: ${this.ataque}`);
-      } else if (item instanceof Armadura) {
-        this.defesa += item.bonusDefesa;
-        console.log(`${this.nome} equipou ${item.nome}. Defesa atual: ${this.defesa}`);
-      } else {
-        console.log(`${item.nome} não pode ser equipado.`);
-      }
-    } else {
-      console.log(`${this.nome} não possui ${item.nome} no inventário.`);
-    }
-  }
 }
 
