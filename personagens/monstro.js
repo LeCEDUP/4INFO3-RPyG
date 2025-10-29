@@ -25,4 +25,4 @@ if (heroi.estaVivo()) {
   console.log(`${heroi.nome} venceu!`);
 } else {
   console.log(`${dragao.nome} venceu!`);
-};
+}

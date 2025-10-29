@@ -6,4 +6,4 @@ export class Armadura extends Item{
         super(nome, descricao);
         this.bonusDefesa = bonusDefesa;
     }
-};
+}

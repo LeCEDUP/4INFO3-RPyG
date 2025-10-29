@@ -3,4 +3,4 @@ export class Item {
         this.nome = nome;
         this.descricao = descricao;
     }
-};
+}
