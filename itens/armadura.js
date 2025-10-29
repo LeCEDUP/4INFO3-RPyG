@@ -1,5 +1,5 @@
 // Desenvolva aqui a classe Armadura em JS
-import { Item } from './Item.js';
+import { Item } from './item.js';
 
 class Armadura extends Item {
     constructor (nome, descricao, bonus_defesa){

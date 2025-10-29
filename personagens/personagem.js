@@ -1,4 +1,4 @@
-// Desenvolva aqui a classe Personagem em JS
+// Desenvolva aqui a classe Personagem em JS 
 export class Personagem {
     constructor(nome, vida, ataque, defesa){
         this.nome = nome

@@ -1,5 +1,5 @@
 // Desenvolva aqui a classe Arma em JSEX
-import { Item } from './Item.js';
+import { Item } from './item.js';
 
 class Arma extends Item {
     constructor(nome, descricao, bonus_ataque) {
