@@ -46,6 +46,22 @@ export class Heroi extends Personagem {
         }
     }
 }
+//     lancarMagia(magia, alvo) {
+//         if (this.inventario.includes(magia)) {
+//             if (this.mana >= magia.custoMana) {
+//                 this.mana -= magia.custoMana;
+//                 alvo.vida -= magia.dano;
+//                 console.log(`${this.nome} lançou ${magia.nome} em ${alvo.nome}, causando ${magia.dano} de dano.`);
+//             } else {
+//                 console.log(`${this.nome} não tem mana suficiente para lançar ${magia.nome}.`);
+//             }
+//         } else {
+//             console.log(`${this.nome} não possui a magia ${magia.nome} no inventário.`);
+//         }
+//     }
+// }
+
+
 
 
 

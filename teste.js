@@ -1,9 +1,10 @@
-const Item = require('./itens/item');
-const Arma = require('./itens/arma');
-const Armadura = require('./itens/armadura');
-const Heroi = require('./personagens/heroi');
-const Monstro = require('./personagens/monstro');
-
+import { Heroi } from './personagens/heroi.js';
+import { Monstro } from './personagens/monstro.js';
+import Arma from './itens/arma.js';
+import { Armadura } from './itens/armadura.js';
+import Item from './itens/item.js';
+import { Cura } from './magias.js'
+import { curaMaior } from './magias.js';
 // Criando personagens
 const heroi = new Heroi('Jeovana', 100, 15, 5);
 const goblin = new Monstro('Goblin Wargs,', 8, 2, 30, 'Pequeno');    
@@ -61,4 +62,6 @@ console.log('\n--- Fim da Aventura ---');
 
 
 
-
+let jeo = new Heroi('Jeo', 15, 50, 100);
+jeo.curar(jeo, curaMaior);
+console.log(`Vida após cura: ${jeo.vida}`);
