@@ -1,5 +1,4 @@
-
-export class Personagem {
+class Personagem {
   constructor(nome, vida, ataque, defesa) {
     this.nome = nome;
     this.vida = vida;
@@ -26,11 +25,5 @@ export class Personagem {
   estaVivo() {
     return this.vida > 0;
   }
-}
+};
 
-// Exemplo de uso:
-const heroi = new Personagem("Herói", 100, 20, 5);
-const monstro = new Personagem("Monstro", 80, 15, 3);
-
-heroi.atacar(monstro);
-monstro.atacar(heroi);

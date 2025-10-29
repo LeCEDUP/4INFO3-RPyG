@@ -40,7 +40,7 @@ if (heroi.estaVivo()) {
   console.log(`${heroi.nome} derrotou o ${goblin.nome}!`);
   heroi.ganharExperiencia(50);
   console.log(`Vida de ${heroi.nome}: ${heroi.vida}`);
-  console.log(`Inventário de ${heroi.nome}: ${heroi.inventario.map(item => item.nome).join(', ')}`);
+  console.log(`Inventário de ${heroi.nome}: ${heroi.inventario.map(item => Item.nome).join(', ')}`);
 }
 
 console.log("\n--- Herói usa poção ---");
