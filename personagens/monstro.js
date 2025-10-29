@@ -28,6 +28,8 @@ export class Dragao extends Monstro{
                 }
             }
 
+
+
 export class Espectro extends Monstro{
     constructor(nome, vida, ataque, defesa, nivel=1, experiencia=0){
         super(nome, vida, ataque, defesa, nivel, experiencia)
@@ -38,6 +40,7 @@ export class Espectro extends Monstro{
     }
 }
 
+
 export class Vampiro extends Monstro{
     constructor(nome, vida, ataque, defesa, nivel=1, experiencia=0){
         super(nome, vida, ataque, defesa, nivel, experiencia)
@@ -47,3 +50,9 @@ export class Vampiro extends Monstro{
         this.defesa = 70;
     }
 }
+
+export let npcDragao = new Dragao("Dragão Ancião");
+export let npcEspectro = new Espectro("Fantasma da Babilônia");
+export let npcVampiro = new Vampiro("Vampiro Nosferatu");
+
+export const lista_monstros = [npcDragao, npcEspectro, npcVampiro];
