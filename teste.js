@@ -17,7 +17,7 @@ const pocaoVida = new Item("Poção de Vida", "Restaura 30 de vida.");
 console.log("--- Início da Aventura ---");
 
 
-heroi.inventario.push(espada, escudo, pocaoVida);
+heroi.inventario.push(espada);
 console.log(`${heroi.nome} encontrou uma ${espada.nome}, um ${escudo.nome} e uma ${pocaoVida.nome}.`);
 
 

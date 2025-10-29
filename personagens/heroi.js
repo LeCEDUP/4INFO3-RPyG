@@ -2,10 +2,11 @@ import { Personagem } from "./personagem.js";
 import { Monstro } from "./monstro.js";
 
 export class Heroi extends Personagem{
-    constructor(nome, vida, ataque, defesa, taxaCritica=0, danoCritico=1){
+    constructor(nome, vida, ataque, defesa, taxaCritica=0, danoCritico=1, inventario = []){
         super(nome, vida, ataque, defesa);
         this.taxaCritica = taxaCritica;
         this.danoCritico = danoCritico;
+        this.inventario = inventario;
     }
 
     usarPocaoDeTaxa(pocao){
@@ -48,3 +49,31 @@ if (heroi.estaVivo()) {
 } else {
   console.log(`${dragao.nome} venceu!`);
 }
+
+class Heroi {
+  constructor(nome, vida, ataque, defesa) {
+    this.nome = nome;
+    this.vida = vida;
+    this.ataque = ataque;
+    this.defesa = defesa;
+    this.inventario = [];
+  }
+
+  
+  equiparItem(item) {
+    if (this.inventario.includes(item)) {
+      if (item instanceof Arma) {
+        this.ataque += item.bonusAtaque;
+        console.log(`${this.nome} equipou ${item.nome}. Ataque atual: ${this.ataque}`);
+      } else if (item instanceof Armadura) {
+        this.defesa += item.bonusDefesa;
+        console.log(`${this.nome} equipou ${item.nome}. Defesa atual: ${this.defesa}`);
+      } else {
+        console.log(`${item.nome} não pode ser equipado.`);
+      }
+    } else {
+      console.log(`${this.nome} não possui ${item.nome} no inventário.`);
+    }
+  }
+}
+

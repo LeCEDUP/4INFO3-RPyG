@@ -1,6 +1,6 @@
 import * as readlineSync from 'readline-sync';
 import { Heroi } from './personagens/heroi.js';
-
+import { Item } from './itens/item.js';
 
 console.log("Bem-vindo ao RPyG!");
 

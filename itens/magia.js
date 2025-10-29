@@ -1,10 +1,4 @@
-class Item {
-  constructor(nome, descricao) {
-    this.nome = nome;
-    this.descricao = descricao;
-  }
-}
-
+import { Item } from "./item.js";
 
 class Magia extends Item {
   constructor(nome, descricao, custoMana, poder) {
