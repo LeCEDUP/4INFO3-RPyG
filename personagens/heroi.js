@@ -26,7 +26,7 @@ export class Heroi extends Personagem {
         this.vida += 10;
         this.ataque += 10;
         this.defesa += 2;
-        self.experiencia -= (this.nivel - 1) * 100;
+        this.experiencia -= (this.nivel - 1) * 100;
         console.log(`${this.nome} subiu para o nível ${this.nivel}! Seus atributos aumentaram.`)
     }
     
