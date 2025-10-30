@@ -7,7 +7,7 @@
 //         self.defesa = defesa
 
 
-class Personagem {
+export class Personagem {
     constructor(nome, vida, ataque, defesa) {
         this.nome = nome;
         this.vida = vida;

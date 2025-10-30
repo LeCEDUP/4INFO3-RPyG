@@ -8,7 +8,7 @@
 //         self.bonus_defesa = bonus_defesa
 
 
-import Item from './item.js';
+import { Item } from './item.js';
 
     export class Armadura extends Item {
         constructor(nome, descricao, bonus_defesa) {
