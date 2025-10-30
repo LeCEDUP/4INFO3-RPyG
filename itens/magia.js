@@ -1,32 +1,32 @@
-import { Item } from "./item.js" ;
+import { Item } from "./item.js";
 
- class Magia extends Item {
- constructor ( name , description , mana cost , power ) {
- super ( name , description );
- this . manacost = manacost ;
- this . poder = poder ;
- }
+class Magia extends Item {
+  constructor(nome, descricao, custoMana, poder) {
+    super(nome, descricao);
+    this.custoMana = custoMana;
+    this.poder = poder;
+  }
 
- castMagic ( target ) {
- console . log ( ` ${this . name } deals ${this . power } magic damage to ${ target . name } !` );
- target . receiveDamage ( this . power );
- }
- }
+  lancarMagia(alvo) {
+    console.log(`${this.nome} causa ${this.poder} de dano mágico em ${alvo.nome}!`);
+    alvo.receberDano(this.poder);
+  }
+}
 
- class Character {
- constructor ( name , life ) {
- this . name = name ;
- this . life = life ;
- }
+class Personagem {
+  constructor(nome, vida) {
+    this.nome = nome;
+    this.vida = vida;
+  }
 
- receiveDamage ( damage ) {
- this . life = Math . max ( 0 , this . life - damage );
- console . log ( ` ${this . name } received ${ damage } damage! Remaining health: ${this . life } ` );
- }
- }
+  receberDano(dano) {
+    this.vida = Math.max(0, this.vida - dano);
+    console.log(`${this.nome} recebeu ${dano} de dano! Vida restante: ${this.vida}`);
+  }
+}
 
 
- const fireBall = new Magic ( "Fireball" , "A sphere of intense flames" , 20 , 35 );
- const orc = new Character ( "Orc" , 100 );
+const bolaDeFogo = new Magia("Bola de Fogo", "Uma esfera de chamas intensas", 20, 35);
+const orc = new Personagem("Orc", 100);
 
- fireball . castMagic ( orc );
+bolaDeFogo.lancarMagia(orc);
