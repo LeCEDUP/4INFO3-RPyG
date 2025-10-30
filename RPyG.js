@@ -16,10 +16,10 @@ let heroi = null;
 // === MONSTROS ALEATÓRIOS ===
 function gerarMonstro() {
   const tipos = [
-    new Monstro("Goblin", "Pequeno", 40, 8, 2),
-    new Monstro("Lobo", "Pequeno", 35, 10, 1),
-    new Monstro("Orc", "Médio", 70, 12, 3),
-    new Monstro("Troll", "Grande", 120, 18, 5)
+    new Monstro("Medusa", "Grande", 40, 8, 2),
+    new Monstro("Creeper", "Médio", 35, 10, 1),
+    new Monstro("Slime", "Médio", 70, 12, 3),
+    new Monstro("Esqueleto", "Grande", 120, 18, 5)
   ];
 
   return tipos[Math.floor(Math.random() * tipos.length)];

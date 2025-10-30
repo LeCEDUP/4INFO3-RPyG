@@ -6,14 +6,14 @@ import Armadura from './itens/armadura.js';
 
 function main() {
   const heroi = new Heroi('Arthos');
-  const espada = new Arma('Espada Curta', 'Uma espada simples', 6);
-  const couraça = new Armadura('Couraça de Couro', 'Proteção básica', 3);
+  const espada = new Arma('Espada de Diamante', 'Uma espada simples', 6);
+  const couraça = new Armadura('Couraça de Ouro', 'Proteção Avançada', 3);
   heroi.adicionarAoInventario(espada);
   heroi.adicionarAoInventario(couraça);
   heroi.equiparItem(espada);
   heroi.equiparItem(couraça);
 
-  const goblin = new Monstro('Goblin', 'Pequeno', 40, 9, 2);
+  const goblin = new Monstro('Creeper', 'Médio', 35, 8, 4);
 
   console.log(`Começa o combate: ${heroi.nome} vs ${goblin.nome}`);
   let turno = 1;
