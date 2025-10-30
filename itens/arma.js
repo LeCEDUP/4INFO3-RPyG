@@ -6,9 +6,9 @@
 //     def __init__(self, nome, descricao, bonus_ataque):
 //         super().__init__(nome, descricao)
 //         self.bonus_ataque = bonus_ataque
+import { Item } from './item.js';
 
-import Item from './item.js';
-
+// A classe Arma agora representa uma Prancha de Surf
 export class Arma extends Item {
     constructor(nome, descricao, bonus_ataque) {
         super(nome, descricao);
