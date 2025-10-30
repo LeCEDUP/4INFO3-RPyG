@@ -132,8 +132,8 @@ function iniciarJogo() {
     heroi = new Heroi(nome);
 
     // Itens iniciais
-    const espada = new Arma("Espada Curta", "Simples, mas útil", 5);
-    const couraca = new Armadura("Armadura de Couro", "Proteção básica", 3);
+    const espada = new Arma("Espada de Diamante", "Avançada, mas útil", 5);
+    const couraca = new Armadura("Armadura de Ouro", "Proteção Média", 3);
 
     heroi.adicionarAoInventario(espada);
     heroi.adicionarAoInventario(couraca);

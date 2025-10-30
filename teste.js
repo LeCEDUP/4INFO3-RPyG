@@ -5,7 +5,7 @@ import Arma from './itens/arma.js';
 import Armadura from './itens/armadura.js';
 
 function main() {
-  const heroi = new Heroi('Arthos');
+  const heroi = new Heroi('Enderman');
   const espada = new Arma('Espada de Diamante', 'Uma espada simples', 6);
   const couraça = new Armadura('Couraça de Ouro', 'Proteção Avançada', 3);
   heroi.adicionarAoInventario(espada);
