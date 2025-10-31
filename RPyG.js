@@ -26,11 +26,17 @@ function gerarMonstro() {
 }
 
 // === COMBATE ===
-function batalha(monstro) {
+async function batalha(monstro) {
   console.log(`\n🔥 Um ${monstro.nome} apareceu!`);
 
   let turno = 1;
-  while (heroi.estaVivo() && monstro.estaVivo()) {
+  let sair = false;
+  while (heroi.estaVivo() && monstro.estaVivo() && !sair) {
+    sair = await rl.question("\nPressione ENTER para continuar a batalha ou digite 'q' para fugir: ") === "q";
+    if (sair) {
+      console.log(`${heroi.nome} fugiu da batalha!`);
+      break;
+    }
     console.log(`\n--- Turno ${turno} ---`);
 
     const resHeroi = heroi.atacar(monstro);
@@ -50,6 +56,7 @@ function batalha(monstro) {
     if (!heroi.estaVivo()) {
       console.log(`💀 ${heroi.nome} foi derrotado...`);
       console.log(`GAME OVER`);
+      rl.close();
       process.exit();
     }
 
@@ -82,9 +89,9 @@ function mostrarInventario() {
   });
 }
 
-function explorar() {
+async function explorar() {
   console.log("\nVocê está explorando...");
-  batalha(gerarMonstro());
+  await batalha(gerarMonstro());
 }
 
 
@@ -111,7 +118,7 @@ async function menu() {
       break;
 
     case "3":
-      explorar();
+      await explorar();
       break;
 
     case "4":
