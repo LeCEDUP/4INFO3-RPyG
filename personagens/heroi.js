@@ -28,20 +28,26 @@ class Heroi extends Personagem {
         console.log(`${this.nome} subiu para o nível ${this.nivel}! Seus atributos aumentaram você está labubu.`)
     }
 
-    equipar_item(item){
-        if (item in this.inventario) {
-            if (item instanceof Arma){
-                this.ataque += item.bonus_ataque
-                console.log(`${this.nome} equipou ${item.nome}. Ataque atual: ${this.ataque}`)
-            }elif isinstance(item, Armadura):
-                this.defesa += item.bonus_defesa
-                console.log(`${this.nome} equipou ${item.nome}. Defesa atual: ${this.defesa}`)
-            else{
-                console.log(`${item.nome} não pode ser equipado.`)}
-            else{
-            console.log(`${this.nome} não possui ${item.nome} no inventário.`)}
+    equiparItem(item) {
+        
+        if (this.inventario.includes(item)) {
+            if (item instanceof Arma) {
+                this.ataque += item.bonusAtaque;
+                console.log(`${this.nome} equipou ${item.nome}. Ataque atual: ${this.ataque}`);
+            } 
 
+            else if (item instanceof Armadura) {
+                this.defesa += item.bonusDefesa;
+                console.log(`${this.nome} equipou ${item.nome}. Defesa atual: ${this.defesa}`);
+            } 
+
+            else {
+                console.log(`${item.nome} não pode ser equipado.`);
             }
-    }
+        } 
 
+        else {
+            console.log(`${this.nome} não possui ${item.nome} no inventário.`);
+        }
+    }
 }

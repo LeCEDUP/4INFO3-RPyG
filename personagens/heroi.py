@@ -24,14 +24,14 @@ class Heroi(Personagem):
         print(f"{self.nome} subiu para o nível {self.nivel}! Seus atributos aumentaram.")
 
     def equipar_item(self, item):
-        if item in self.inventario:
-            if isinstance(item, Arma):
-                self.ataque += item.bonus_ataque
-                print(f"{self.nome} equipou {item.nome}. Ataque atual: {self.ataque}")
-            elif isinstance(item, Armadura):
-                self.defesa += item.bonus_defesa
+        if itesa += item.bonus_defesa
                 print(f"{self.nome} equipou {item.nome}. Defesa atual: {self.defesa}")
             else:
                 print(f"{item.nome} não pode ser equipado.")
         else:
-            print(f"{self.nome} não possui {item.nome} no inventário.")
+            print(f"{self.nome} não possui {item.nome} no inventário.")em in self.inventario:
+            if isinstance(item, Arma):
+                self.ataque += item.bonus_ataque
+                print(f"{self.nome} equipou {item.nome}. Ataque atual: {self.ataque}")
+            elif isinstance(item, Armadura):
+                self.def
