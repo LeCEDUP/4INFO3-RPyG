@@ -1,7 +1,8 @@
-import{Personagem} from './personagem.js';
+import Personagem from './personagem.js';
 
-export class Monstro extends personagem{constructor(nome, vida, ataque, defesa, tipo){
-        super(nome, vida, ataque, defesa);
-        this.tipo = tipo;
-    };
-};
+export default class Monstro extends Personagem {
+  constructor(nome, hpMax, forca, defesa, xpDrop) {
+    super(nome, hpMax, forca, defesa);
+    this.xpDrop = xpDrop || 5;
+  }
+}

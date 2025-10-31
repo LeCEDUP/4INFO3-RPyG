@@ -1,33 +1,26 @@
-import {Personagem} from './personagem.js';
-import {Arma} from '../itens/arma.js';
-import {Armadura} from '../itens/armadura.js';
+import Personagem from './personagem.js';
 
-export class Heroi extends Personagem {
-    constructor(nome, vida, ataque, defesa, nivel = 1, experiencia = 0, inventario = 0){
-       super(nome, vida, ataque, defesa);
-       this.nivel = nivel;
-       this.experiencia = experiencia;
-       this.inventario = inventario;
-    };
-    ganharExperiencia(exp){
-        this.experiencia += exp;
-        console.log(`${this.nome} ganhou ${exp} de experiencia. total: ${this.experiencia}`);
-        if (this.experiencia >= this.nivel*100)
-            this.subirNivel();
-    };
+export default class Heroi extends Personagem {
+  constructor(nome) {
+    super(nome, 30, 2, 1);
+    this.xp = 0;
+  }
 
-    subirNivel(){
-        this.nivel += 1;
-        this.vida += 20;
-        this.ataque += 5;
-        this.defsa += 5;
-        this.experiencia -= (this.nivel -1)*100;
-        
-        console.log(`${this.nome} subiu para o nivel ${this.nivel}!`); 
-    };
-    equiparItem(item){
-        this.inventario.push(item);
-        console.log(`${this.nome} equipou ${item.nome || 'um item'}`);
-    };
+  ganharXP(xp) {
+    this.xp += xp;
+    const xpParaProx = this.nivel * 10;
+    if (this.xp >= xpParaProx) {
+      this.xp -= xpParaProx;
+      this.nivelUp();
+    }
+  }
 
-};
+  nivelUp() {
+    this.nivel++;
+    this.hpMax += 10;
+    this.forca += 1;
+    this.defesa += 1;
+    this.hp = this.hpMax;
+    console.log(`${this.nome} subiu para o nível ${this.nivel}!`);
+  }
+}

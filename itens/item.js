@@ -1,6 +1,6 @@
-export class Item{
-    constructor(nome, descrição){
-        this.nome = nome;
-        this.descrição = descrição;
-    }
+export default class Item {
+  constructor(nome, descricao) {
+    this.nome = nome;
+    this.descricao = descricao || "";
+  }
 }
