@@ -1,72 +1,51 @@
-import * as readline from 'readline-sync';
-
-import { Item } from './itens/item.js';
-import { Arma } from './itens/arma.js';
-import { Armadura } from './itens/armadura.js';
+import * as readlineSync from 'readline-sync';
 import { Heroi } from './personagens/heroi.js';
-import { Monstro } from './personagens/monstro.js';
 
-// Criando personagens
-const heroi = new Heroi("Vichenzo", 1000, 250, 50);
-const goblin = new Monstro("Goblin", 300, 90, 20, "Pequeno");
-const dragao = new Monstro("Dragão", 500, 50, 30, "Grande");
 
-// Criando itens
-const espada = new Arma("Espada Longa", "Uma espada afiada.", 30);
-const escudo = new Armadura("Escudo de Ferro", "Um escudo resistente.", 5);
-const pocaoVida = new Item("Poção de Vida", "Restaura 40 de vida.");
+console.log("Bem-vindo ao RPyG!");
 
-console.log("--- Início da Aventura ---");
+const nomeHeroi = readlineSync.question("Escolha o nome do seu herói: ");
+const heroi = new Heroi(nomeHeroi);
+const pocao = new Item("Poção de Vida", 20);
+heroi.inventario.push(pocao);
 
-// Herói encontra itens
-heroi.inventario.push(espada);
-heroi.inventario.push(escudo);
-heroi.inventario.push(pocaoVida);
-console.log(`${heroi.nome} encontrou uma ${espada.nome}, um ${escudo.nome} e uma ${pocaoVida.nome}.`);
+function batalha() {
+    const monstro = new Monstro("Goblin");
+    console.log(`Um ${monstro.nome} apareceu!`);
+    
+    while (heroi.vida > 0 && monstro.vida > 0) {
+        console.log("\n1. Atacar\n2. Usar item");
+        const escolha = readlineSync.questionInt("O que deseja fazer? ");
 
-// Herói equipa itens
-heroi.equiparItem(espada);
-heroi.equiparItem(escudo);
+        if (escolha === 1) {
+            heroi.atacar(monstro);
+        } else if (escolha === 2) {
+            if (heroi.inventario.length === 0) {
+                console.log("Sem itens!");
+            } else {
+                heroi.usarItem(0, heroi); 
+            }
+        } else {
+            console.log("Opção inválida!");
+        }
 
-console.log("\n--- Batalha contra o Goblin ---");
-while (heroi.estaVivo() && goblin.estaVivo()) {
-  heroi.atacar(goblin);
-  if (goblin.estaVivo()) {
-    goblin.atacar(heroi);
-  }
+        if (monstro.vida > 0) monstro.atacar(heroi);
+    }
+
+    if (heroi.vida <= 0) console.log("Você foi derrotado!");
+    else console.log("Você venceu a batalha!");
 }
 
-if (heroi.estaVivo()) {
-  console.log(`${heroi.nome} derrotou o ${goblin.nome}!`);
-  heroi.ganharExperiencia(50);
-  console.log(`Vida de ${heroi.nome}: ${heroi.vida}`);
-  console.log(`Inventário de ${heroi.nome}: ${heroi.inventario.map(item => Item.nome).join(', ')}`);
+function menu() {
+    let opcao = 0;
+    do {
+        console.log("\nMenu:\n1. Iniciar batalha\n2. Sair");
+        opcao = readlineSync.questionInt("Escolha: ");
+
+        if (opcao === 1) batalha();
+        else if (opcao === 2) console.log("Saindo do jogo...");
+        else console.log("Opção inválida!");
+    } while (opcao !== 2);
 }
 
-console.log("\n--- Herói usa poção ---");
-const indicePocao = heroi.inventario.indexOf(pocaoVida);
-if (indicePocao !== -1) {
-  heroi.vida += 30;
-  heroi.inventario.splice(indicePocao, 1);
-  console.log(`${heroi.nome} usou ${pocaoVida.nome}. Vida atual: ${heroi.vida}`);
-}
-
-console.log("\n--- Batalha contra o Dragão (Desafio Final) ---");
-while (heroi.estaVivo() && dragao.estaVivo()) {
-  heroi.atacar(dragao);
-  if (dragao.estaVivo()) {
-    dragao.atacar(heroi);
-  }
-}
-
-if (heroi.estaVivo()) {
-  console.log(`\nParabéns, ${heroi.nome}! Você derrotou o ${dragao.nome} e salvou o reino!`);
-  heroi.ganharExperiencia(200);
-} else {
-  console.log(`\n${heroi.nome} foi derrotado pelo ${dragao.nome}. Fim de jogo.`);
-}
-
-console.log("\n--- Fim da Aventura ---");
-
-
-
+menu();
