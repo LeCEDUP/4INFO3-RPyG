@@ -1,9 +1,10 @@
 import { Personagem } from "./personagem.js";
 import { Arma } from "../itens/arma.js";
 import { Armadura } from "../itens/armadura.js";
+import { Magia } from "../itens/magia.js";
 
-// let status = idade >= 18 ? "Adulto" : "Menor de idade";
-// condição ? valorSeVerdadeiro : valorSeFalso;
+
+
 
 export class Heroi extends Personagem {
     constructor(nome, ataque, vida, defesa, nivel = 1, experiencia = 0, inventario = null) {
@@ -23,9 +24,9 @@ export class Heroi extends Personagem {
 
     subirNivel() {
         this.nivel += 1;
-        this.vida += 10;
-        this.ataque += 10;
-        this.defesa += 2;
+        this.vida += 20;
+        this.ataque += 20;
+        this.defesa += 20;
         this.experiencia -= (this.nivel - 1) * 100;
         console.log(`${this.nome} subiu para o nível ${this.nivel}! Seus atributos aumentaram.`)
     }
@@ -36,11 +37,14 @@ export class Heroi extends Personagem {
                 this.ataque += item.bonusAtaque;
                 console.log(`${this.nome} equipou ${item.nome}.
                     Ataque atual: ${this.ataque}`);
-            } 
-            else if (item instanceof Armadura) {
+            } else if (item instanceof Armadura) {
                 this.defesa += item.bonusDefesa;
                 console.log(`${this.nome} equipou ${item.nome}.
                     Defesa atual: ${this.defesa}`);
+            } else if (item instanceof Magia) {
+                this.magia += item.bonusMagia;
+                console.log(`${this.nome} equipou ${item.nome}.
+                    Magia atual: ${this.magia}`);
             }
         } else {
             console.log(`${this.nome} não possui ${item.nome} no inventário.`)

@@ -1,9 +1,10 @@
 export class Personagem {
-    constructor(nome, vida, ataque, defesa){
+    constructor(nome, vida, ataque, defesa, magia = 0){
         this.nome = nome;
         this.ataque = ataque;
         this.vida = vida;
         this.defesa = defesa;
+        this.magia = magia;
     }
 
     atacar(alvo) {
@@ -23,7 +24,7 @@ export class Personagem {
     }
 
     exibirInformacoes() {
-        console.log(`${this.nome} tem ${this.vida} de vida, ${this.ataque} de ataque, ${this.defesa} de defesa.`)
+        console.log(`${this.nome} tem ${this.vida} de vida, ${this.ataque} de ataque, ${this.defesa} de defesa, ${this.magia} de magia.`)
     }
 
     estaVivo() {
