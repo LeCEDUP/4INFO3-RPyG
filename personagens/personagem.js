@@ -32,3 +32,4 @@ heroi.receberDano(30);
 console.log(`${heroi.nome} agora tem ${heroi.vida} de vida.`); 
 heroi.receberDano(100);
 console.log(`${heroi.nome} agora tem ${heroi.vida} de vida.`); 
+
