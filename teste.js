@@ -61,7 +61,3 @@ if (heroi.estaVivo()) {
 console.log('\n--- Fim da Aventura ---');
 
 
-
-let jeo = new Heroi('Jeo', 15, 50, 100);
-jeo.curar(jeo, curaMaior);
-console.log(`Vida após cura: ${jeo.vida}`);

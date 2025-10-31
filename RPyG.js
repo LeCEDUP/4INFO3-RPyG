@@ -2,6 +2,7 @@ import readline from 'readline-sync';
 import { Heroi } from './personagens/heroi.js';
 import { magia } from './itens/item.js';
 import Arma from './itens/arma.js';
+import { curaMaior, curaMenor } from './magias.js';
 
 function criarInimigo(classe) {
     if (classe === 1) return { nome: 'Goblin', vida: 8, ataque: 6, defesa: 2 };
@@ -52,7 +53,6 @@ function lutar(jogador, inimigo) {
     }
 }
 
-
 while (true) {
     console.clear();
     console.log('Bem vindo ao RPyG - Role Playing Game!\n');
@@ -71,7 +71,7 @@ while (true) {
 
     if (escolhaDeClasse === 4) {
         console.log('\nVocê escolheu sair do jogo. Até a próxima aventureiro!\n');
-        break; 
+        break;
     }
     
     const nome = readline.question('Insira o nome do seu personagem: ');
@@ -84,7 +84,9 @@ while (true) {
     } else if (escolhaDeClasse === 3) {
         personPrincipal = new Heroi(nome, 6, 20, 0);
     }
+
     let vidaMaxima = personPrincipal.vida;
+    const espada = new Arma('Espada Longa', 'Uma espada afiada.', 10);
 
     console.clear();
     console.log('Parabéns — seu personagem inicial está pronto!\n');
@@ -93,47 +95,45 @@ while (true) {
     console.log(` Vida:   ${personPrincipal.vida}`);
     console.log(` Defesa: ${personPrincipal.defesa}\n`);
 
-    const querLutar = (readline.question('Deseja enfrentar um inimigo agora? (s/n): ') || '').trim().toLowerCase().startsWith('s');
+    while (personPrincipal.vida > 0) {
+        const querLutar = (readline.question('Deseja enfrentar um inimigo agora? (s/n): ') || '').trim().toLowerCase();
+        if (querLutar !== 's') break;
 
-  
-while (personPrincipal.vida > 0) {
-    const querLutar = (readline.question('Deseja enfrentar um inimigo agora? (s/n): ') || '').trim().toLowerCase();
-    if (querLutar !== 's') break;
+        const classeAleatoria = Math.floor(Math.random() * 3) + 1;
+        const inimigo = criarInimigo(classeAleatoria);
+        console.log(`\nUm ${inimigo.nome} aparece para lutar!\n`);
+        const resultado = lutar(personPrincipal, inimigo);
 
-   
-    const classeAleatoria = Math.floor(Math.random() * 3) + 1;
-    const inimigo = criarInimigo(classeAleatoria);
+        if (resultado === 'derrota') {
+            console.log('\nSeu herói caiu em batalha...');
+            break;
+        } else if (resultado === 'vitoria') {
+            const cura = Math.floor(vidaMaxima * 0.2);
+            personPrincipal.vida = Math.min(personPrincipal.vida + cura, vidaMaxima);
+            console.log(`\nVocê recupera ${cura} de vida! Vida atual: ${personPrincipal.vida}\n`);
+        }
 
-    console.log(`\n Um ${inimigo.nome} aparece para lutar!\n`);
-    const resultado = lutar(personPrincipal, inimigo);
+        const resposta = (readline.question('Deseja usar uma magia de cura Maior ou Menor? (s/n): ') || '').trim().toLowerCase();
+        if (resposta === 's') {
+            const tipoCura = (readline.question('Qual magia deseja usar? (maior/menor): ') || '').trim().toLowerCase();
+            if (tipoCura === 'maior') {
+                personPrincipal.curar(personPrincipal, curaMaior);
+                console.log(`Vida após cura: ${personPrincipal.vida}`);
+            } else if (tipoCura === 'menor') {
+                personPrincipal.curar(personPrincipal, curaMenor);
+                console.log(`Vida após cura: ${personPrincipal.vida}`);
+            } else {
+                console.log('Opção de cura inválida.');
+            }
+        }
 
-    if (resultado === 'derrota') {
-        console.log('\n Seu herói caiu em batalha...');
-        break;
-    } else if (resultado === 'vitoria') {
-      
-        const cura = Math.floor(vidaMaxima * 0.2);
-        personPrincipal.vida = Math.min(personPrincipal.vida + cura, vidaMaxima);
-        console.log(`\n Você recupera ${cura} de vida! Vida atual: ${personPrincipal.vida}\n`);
+        const usararma = (readline.question('Deseja equipar uma arma agora? (s/n): ') || '').trim().toLowerCase();
+        if (usararma === 's') {
+            personPrincipal.inventario.push(espada);
+            personPrincipal.equiparItem(espada);
+            console.log(`Você equipou: ${espada.nome}`);
+        }
     }
-}
-const usarmagia = (readline.question('Deseja usar uma magia de cura antes de encerrar? (s/n): ') || '').trim().toLowerCase();
-if (usarmagia === 's') {
-    if (personPrincipal.inventario.includes(magia)) {
-        personPrincipal.vida += magia.dano;
-        console.log(`${personPrincipal.nome} usou ${magia.nome}. Vida atual: ${personPrincipal.vida}`);
-    } else {
-        console.log(`${personPrincipal.nome} não possui a magia ${magia.nome} no inventário.`);
-    }
-}
-const espada = new Arma('Espada Longa', 'Uma espada afiada.', 10);
- const usararma = (readline.question('Deseja equipar uma arma antes de encerrar? (s/n): ') || '').trim().toLowerCase();
- if (usararma === 's') {
-     
-        personPrincipal.inventario.push(espada);
-        personPrincipal.equiparItem(espada);
-    }
-
 
     const jogarNovamente = (readline.question('\nDeseja criar outro personagem e jogar novamente? (s/n): ') || '').trim().toLowerCase();
     if (jogarNovamente !== 's') {
@@ -141,4 +141,3 @@ const espada = new Arma('Espada Longa', 'Uma espada afiada.', 10);
         break;
     }
 }
-
