@@ -6,310 +6,250 @@ import { Magia } from './itens/magia.js';
 import { Armadura } from './itens/armadura.js';
 import { Arma } from './itens/arma.js';
 
-function linha(caractere = '-') {
-    console.log(caractere.repeat(80));
+function linhaTopo(comprimento = 80) {
+  return '┌' + '─'.repeat(comprimento - 2) + '┐';
 }
 
-function box(texto) {
-    linha('=');
-    const linhasTexto = texto.split('\n');
-    linhasTexto.forEach(linhaTexto => {
-        const espacosAntes = Math.floor((80 - 2 - linhaTexto.length) / 2);
-        const espacosDepois = 80 - 2 - linhaTexto.length - espacosAntes;
-        console.log(`|${' '.repeat(espacosAntes)}${linhaTexto}${' '.repeat(espacosDepois)}|`);
-    });
-    linha('=');
+function linhaBaixo(comprimento = 80) {
+  return '└' + '─'.repeat(comprimento - 2) + '┘';
 }
 
-function boxEsquerda(texto) {
-    linha('-');
-    const linhasTexto = texto.split('\n');
-    linhasTexto.forEach(linhaTexto => {
-        const espacosDepois = 80 - 2 - linhaTexto.length;
-        console.log(`| ${linhaTexto}${' '.repeat(Math.max(0, espacosDepois - 1))}|`);
-    });
-    linha('-');
+function quebrarTexto(texto, largura) {
+  const palavras = texto.split(' ');
+  let linhaAtual = '';
+  const linhas = [];
+
+  palavras.forEach(palavra => {
+    if ((linhaAtual + palavra).length + (linhaAtual ? 1 : 0) <= largura) {
+      linhaAtual += (linhaAtual ? ' ' : '') + palavra;
+    } else {
+      linhas.push(linhaAtual);
+      linhaAtual = palavra;
+    }
+  });
+
+  if (linhaAtual) linhas.push(linhaAtual);
+  return linhas;
+}
+
+function box(texto, largura = 80) {
+  const linhasSeparadas = texto.split('\n');
+  let linhasTexto = [];
+  linhasSeparadas.forEach(linha => {
+    const linhasQuebradas = quebrarTexto(linha, largura - 4);
+    linhasTexto = linhasTexto.concat(linhasQuebradas);
+  });
+
+  console.log(linhaTopo(largura));
+  linhasTexto.forEach(linhaTexto => {
+    const textoLimpo = linhaTexto.trim();
+    const espacosAntes = Math.floor((largura - 2 - textoLimpo.length) / 2);
+    const espacosDepois = largura - 2 - textoLimpo.length - espacosAntes;
+    console.log('│' + ' '.repeat(espacosAntes) + textoLimpo + ' '.repeat(espacosDepois) + '│');
+  });
+  console.log(linhaBaixo(largura));
+  console.log();
+}
+
+function boxEsquerda(texto, largura = 80) {
+  const linhasSeparadas = texto.split('\n');
+  let linhasTexto = [];
+  linhasSeparadas.forEach(linha => {
+    const linhasQuebradas = quebrarTexto(linha, largura - 4);
+    linhasTexto = linhasTexto.concat(linhasQuebradas);
+  });
+
+  console.log(linhaTopo(largura));
+  linhasTexto.forEach(linhaTexto => {
+    const textoLimpo = linhaTexto.trim();
+    const espacosDepois = largura - 2 - textoLimpo.length;
+    console.log('│ ' + textoLimpo + ' '.repeat(Math.max(0, espacosDepois - 1)) + '│');
+  });
+  console.log(linhaBaixo(largura));
+  console.log();
 }
 
 function perguntar(msg) {
-    let resposta = readline.question(msg);
-    if (resposta === "sair") {
-        console.log("\nJogo encerrado. Até a próxima!");
-        process.exit();
-    }
-    return resposta;
-}
-
-box('Bem vindo ao RPyG do Caio!!');
-boxEsquerda("Para sair digite sair a qualquer momento!");
-boxEsquerda('Classes | Atributos iniciais \n \n 1- Cavaleiro | Ataque: 10 | Vida: 10 | Magia: 0 (Itens : Espada(5 bonus de ataque) e Armadura do reino(9 bonus de defesa) ) \n 2- Arqueira | Ataque: 13 | Vida: 10 | Magia: 0 (Itens: Arco(4 bonus de ataque) e Manta do arqueiro(5 bonus de defesa))\n 3- Assassino | Ataque: 15 | Vida: 10 | Magia: 5 (Itens: Faca almaldiçoada(10 bonus de ataque) e Amuleto da Sombra(5 bonus de magia))');
-
-let escolhaDeClasse = parseInt(perguntar('Faça a escolha da sua classe [1 | 2 | 3]: '));
-while (escolhaDeClasse < 1 || escolhaDeClasse > 3) {
-    console.log('Numero inválido, escolha apenas um numero entre essses [1 | 2 | 3]')
-    escolhaDeClasse = parseInt(perguntar('Faca a escolha da sua classe [1 | 2 | 3]: '));
-}
-
-let nome = perguntar('Insira o nome do seu personagem: ');
-let personPrincipal;
-let armaInicial;
-let armaduraInicial;
-
-
-if (escolhaDeClasse === 1) {
-    personPrincipal = new Heroi(nome, 10, 10, 0);
-    armaInicial = new Arma("Espada", "Espada dada para todos os cavaleiros guardiões do rei", 5, "Comum");
-    armaduraInicial = new Armadura("Armadura do reino", "Armadura dos cavaleiros guardiões", 8);
-} else if (escolhaDeClasse === 2) {
-    personPrincipal = new Heroi(nome, 13, 10, 0);
-    armaInicial = new Arma("Arco", "Arco dado para a tropa de infantaria do reino", 4, "Comum");
-    armaduraInicial = new Armadura("Manta do arqueiro", "Manta para diferenciar a tropa de infantaria da tropa de combate", 5)
-} else if (escolhaDeClasse === 3) {
-    personPrincipal = new Heroi(nome, 16, 15, 0, 5);
-    armaInicial = new Arma("Faca Almaldiçoada", "Faca dos assassinos da organização secreta do reino", 10, "Comum");
-    const magiaInicial = new Magia("Amuleto da Sombra", "Amuleto que aumenta o poder das sombras", 5);
-    personPrincipal.inventario.push(magiaInicial);
-    personPrincipal.equiparItem(magiaInicial);
-}
-personPrincipal.inventario.push(armaInicial);
-personPrincipal.inventario.push(armaduraInicial);
-
-personPrincipal.equiparItem(armaInicial);
-personPrincipal.equiparItem(armaduraInicial);
-
-
-boxEsquerda(`Parabéns seu personagem inicial está pronto! \n Nome: ${personPrincipal.nome} \n Ataque: ${personPrincipal.ataque} \n Vida: ${personPrincipal.vida} \n Defesa: ${personPrincipal.defesa} \n Magia: ${personPrincipal.magia}`);
-
-
-boxEsquerda(`Bem vindo ${personPrincipal.nome}, está preparado para a primeira luta? \nEu não ligo se você não estiver então vamos começar!`);
-
-const margit = new Monstro('Margit, o Agouro Caído', 15, 15, 5, "Demigod");
-margit.exibirInformacoes();
-perguntar('Aperte enter para iniciar: ');
-
-box(`Primeira Batalha! ${personPrincipal.nome} X ${margit.nome}`);
-linha();
-console.log("Quem atacará primeiro? [0-49 Herói | 50-100 Monstro]");
-linha();
-perguntar("Aperte enter para girar: ");
-
-let aleatorio = Math.round(Math.random() * 100);
-if (aleatorio < 50) {
-    boxEsquerda(`O numero escolhido foi ${aleatorio}, quem começa atacando é o herói: ${personPrincipal.nome}!`);
-    perguntar("Aperte enter para atacar: \n")
-    personPrincipal.atacar(margit);
-} else if (aleatorio >= 50) {
-    boxEsquerda(`O numero escolhido foi ${aleatorio}, quem começa atacando é o Montro: ${margit.nome}!`);
-    perguntar("Aperte enter para receber ataque: \n")
-    margit.atacar(personPrincipal);
-}
-
-while (personPrincipal.estaVivo() === true && margit.estaVivo() === true) {
-    perguntar("\nAperte enter para jogar mais uma rodada: ")
-    if (aleatorio >= 50 && personPrincipal.estaVivo() === true && margit.estaVivo() === true) {
-        boxEsquerda(`Vez do herói ${personPrincipal.nome}!`);
-        perguntar("Aperte enter para atacar: ")
-        personPrincipal.atacar(margit);
-        aleatorio = 1;
-
-    } else if (aleatorio < 50 && personPrincipal.estaVivo() === true && margit.estaVivo() === true) {
-        boxEsquerda(`Vez do monstro ${margit.nome}`);
-        perguntar("Aperte enter para receber ataque: ")
-        margit.atacar(personPrincipal);
-        aleatorio = 50;
-    }
-}
-
-
-if (!margit.estaVivo()) {
-    box('VITÓRIA!');
-    perguntar("\nAperte enter para receber niveis: \n")
-    personPrincipal.ganharExperiencia(1000);
-    personPrincipal.exibirInformacoes();
-} else {
-    box('You loose, Wasted!');
-    console.log("\nJogue novamente para vencer!");
+  const resposta = readline.question(msg);
+  if (resposta.toLowerCase() === "sair") {
+    console.log("\nJogo encerrado. Até a próxima!");
     process.exit();
+  }
+  return resposta;
 }
 
-perguntar("\nAperte enter para iniciar a próxima batalha: \n")
+function escolherClasse() {
+  box('Bem vindo ao RPyG do Caio!!');
+  boxEsquerda("Para sair digite sair a qualquer momento!");
+  boxEsquerda(
+    'Classes | Atributos iniciais \n' +
+    '\n 1- Cavaleiro | Ataque: 10 | Vida: 10 | Magia: 0 (Itens: Espada(5 de ataque) e Armadura do reino(9 de defesa))' +
+    '\n 2- Arqueira | Ataque: 13 | Vida: 10 | Magia: 0 (Itens: Arco(4 de ataque) e Manta do arqueiro(5 de defesa))' +
+    '\n 3- Assassino | Ataque: 16 | Vida: 15 | Magia: 5 (Itens: Faca amaldiçoada(10 de ataque) e Amuleto da Sombra(5 de magia))'
+  );
 
-const godrick = new Monstro("Godrick, o Enxertado", 25, 90, 15, "Demigod");
-
-
-box(`Segunda Batalha! ${personPrincipal.nome} X ${godrick.nome}`);
-godrick.exibirInformacoes();
-linha();
-console.log("Quem atacará primeiro? [0-49 Herói | 50-100 Monstro]");
-linha();
-perguntar("Aperte enter para girar: ");
-
-aleatorio = Math.round(Math.random() * 100);
-if (aleatorio < 50) {
-    boxEsquerda(`O numero escolhido foi ${aleatorio}, quem começa atacando é o herói: ${personPrincipal.nome}!`);
-    perguntar("Aperte enter para atacar: \n");
-    personPrincipal.atacar(godrick);
-} else if (aleatorio >= 50) {
-    boxEsquerda(`O numero escolhido foi ${aleatorio}, quem começa atacando é o Montro: ${godrick.nome}!`);
-    perguntar("Aperte enter para receber ataque: \n");
-    godrick.atacar(personPrincipal);
+  let escolha = parseInt(perguntar('Escolha sua classe [1 | 2 | 3]: '));
+  while (![1, 2, 3].includes(escolha)) {
+    boxEsquerda('Número inválido, escolha apenas 1, 2 ou 3.');
+    escolha = parseInt(perguntar('Escolha sua classe [1 | 2 | 3]: '));
+  }
+  return escolha;
 }
 
-while (personPrincipal.estaVivo() === true && godrick.estaVivo() === true) {
-    perguntar("\nAperte enter para jogar mais uma rodada: ");
-    if (aleatorio >= 50 && personPrincipal.estaVivo() === true && godrick.estaVivo() === true) {
-        boxEsquerda(`Vez do herói ${personPrincipal.nome}!`);
-        perguntar("Aperte enter para atacar: ")
-        personPrincipal.atacar(godrick);
-        aleatorio = 1;
+function criarPersonagem(escolha, nome) {
+  let personagem, arma, armadura;
 
-    } else if (aleatorio < 50 && personPrincipal.estaVivo() === true && godrick.estaVivo() === true) {
-        boxEsquerda(`Vez do monstro ${godrick.nome}`);
-        perguntar("Aperte enter para receber ataque: ");
-        godrick.atacar(personPrincipal);
-        aleatorio = 50;
+  if (escolha === 1) {
+    personagem = new Heroi(nome, 10, 10, 8, 0);
+    arma = new Arma("Espada", "Espada dos cavaleiros guardiões do rei", 5, "Comum");
+    armadura = new Armadura("Armadura do reino", "Armadura dos cavaleiros guardiões", 8);
+  } else if (escolha === 2) {
+    personagem = new Heroi(nome, 13, 10, 5, 0);
+    arma = new Arma("Arco", "Arco da tropa de infantaria do reino", 4, "Comum");
+    armadura = new Armadura("Manta do arqueiro", "Manta da tropa de infantaria", 5);
+  } else {
+    personagem = new Heroi(nome, 16, 15, 10, 5);
+    arma = new Arma("Faca amaldiçoada", "Faca dos assassinos da organização secreta", 10, "Comum");
+    const magia = new Magia("Amuleto da Sombra", "Amuleto que aumenta o poder das sombras", 5);
+    personagem.inventario.push(magia);
+    personagem.equiparItem(magia);
+  }
+
+  personagem.inventario.push(arma);
+  personagem.inventario.push(armadura);
+
+  personagem.equiparItem(arma);
+  personagem.equiparItem(armadura);
+
+  return personagem;
+}
+
+function exibirStatusPersonagem(personagem) {
+  boxEsquerda(
+    `Parabéns, seu personagem inicial está pronto!\n` +
+    `Nome: ${personagem.nome}\n` +
+    `Ataque: ${personagem.ataque}\n` +
+    `Vida: ${personagem.vida}\n` +
+    `Defesa: ${personagem.defesa}\n` +
+    `Magia: ${personagem.magia}`
+  );
+}
+
+function iniciarBatalha(jogador, inimigo) {
+  box(`Batalha! ${jogador.nome} X ${inimigo.nome}`);
+  inimigo.exibirInformacoes();
+  boxEsquerda("Quem atacará primeiro? [0-49 Herói | 50-100 Monstro]");
+  perguntar("Aperte enter para girar: ");
+
+  let vez = Math.round(Math.random() * 100);
+  if (vez < 50) {
+    boxEsquerda(`Número sorteado: ${vez}, começa atacando o herói: ${jogador.nome}!`);
+    perguntar("Aperte enter para atacar: ");
+    jogador.atacar(inimigo);
+  } else {
+    boxEsquerda(`Número sorteado: ${vez}, começa atacando o monstro: ${inimigo.nome}!`);
+    perguntar("Aperte enter para receber ataque: ");
+    inimigo.atacar(jogador);
+  }
+
+  while (jogador.estaVivo() && inimigo.estaVivo()) {
+    perguntar("\nAperte enter para a próxima rodada: ");
+    if (vez >= 50) {
+      boxEsquerda(`Vez do herói ${jogador.nome}!`);
+      perguntar("Aperte enter para atacar: ");
+      jogador.atacar(inimigo);
+      vez = 1;
+    } else {
+      boxEsquerda(`Vez do monstro ${inimigo.nome}`);
+      perguntar("Aperte enter para receber ataque: ");
+      inimigo.atacar(jogador);
+      vez = 50;
     }
+  }
+
+  if (!inimigo.estaVivo()) {
+    return 'vitoria';
+  } else {
+    return 'derrota';
+  }
 }
-if (!godrick.estaVivo()) {
-    const armaduraGodrick = new Armadura("Armadura de Godrick", "Armadura lendária do Godrick, alta defesa", 20);
-    const armaGodrick = new Arma("Espada de Godrick", "Espada lendária de Godrick com grande poder de ataque", 15, "Lendária");
+
+const margit = new Monstro('Margit, o Agouro Caído', 12, 20, 8, "Demigod", 5);
+const godrick = new Monstro("Godrick, o Enxertado", 50, 40, 25, "Demigod", 12);
+const rennala = new Monstro("Rennala, Rainha da Lua Cheia", 15, 70, 20, "Demigod", 8);
+const radahn = new Monstro("Radahn, Flagelo Estelar", 22, 100, 25, "Demigod", 15);
+
+async function main() {
+  const escolha = escolherClasse();
+  const nome = perguntar('Insira o nome do seu personagem: ');
+  const personagem = criarPersonagem(escolha, nome);
+
+  exibirStatusPersonagem(personagem);
+
+  boxEsquerda(`Bem vindo ${personagem.nome}, está preparado para a primeira luta? \nEu não ligo se não estiver, vamos começar!`);
+
+  if (iniciarBatalha(personagem, margit) === 'vitoria') {
     box('VITÓRIA!');
-    perguntar("\nAperte enter para receber níveis: \n");
-    personPrincipal.ganharExperiencia(1500);
-    personPrincipal.exibirInformacoes();
+    perguntar("Aperte enter para receber experiência:\n");
+    personagem.ganharExperiencia(750);
+    personagem.exibirInformacoes();
 
-    personPrincipal.inventario.push(armaduraGodrick);
-    personPrincipal.equiparItem(armaduraGodrick);
-    personPrincipal.inventario.push(armaGodrick);
-    personPrincipal.equiparItem(armaGodrick);
-    console.log("Você recebeu a Armadura de Godrick e a equipou!");
+    if (iniciarBatalha(personagem, godrick) === 'vitoria') {
+      personagem.inventario.push(new Armadura("Armadura de Godrick", "Armadura lendária do Godrick, alta defesa", 20));
+      personagem.inventario.push(new Arma("Espada de Godrick", "Espada lendária de Godrick com grande poder de ataque", 15, "Lendária"));
+      personagem.equiparItem(personagem.inventario[personagem.inventario.length-2]);
+      personagem.equiparItem(personagem.inventario[personagem.inventario.length-1]);
+      console.log("Você recebeu a Armadura e Espada de Godrick e as equipou!");
 
-    perguntar("\nAperte enter para iniciar a Terceira Batalha: \n")
+      box('VITÓRIA!');
+      perguntar("Aperte enter para receber experiência:\n");
+      personagem.ganharExperiencia(1000);
+      personagem.exibirInformacoes();
 
-    const rennala = new Monstro("Rennala, Rainha da Lua Cheia", 10, 100, 5, "Demigod");
-
-    box(`Terceira Batalha! ${personPrincipal.nome} X ${rennala.nome}`);
-    rennala.exibirInformacoes();
-    linha();
-    console.log("Quem atacará primeiro? [0-49 Herói | 50-100 Monstro]");
-    linha();
-    perguntar("Aperte enter para girar: ");
-
-    aleatorio = Math.round(Math.random() * 100);
-    if (aleatorio < 50) {
-        boxEsquerda(`O numero escolhido foi ${aleatorio}, quem começa atacando é o herói: ${personPrincipal.nome}!`);
-        perguntar("Aperte enter para atacar: \n");
-        personPrincipal.atacar(rennala);
-    } else if (aleatorio >= 50) {
-        boxEsquerda(`O numero escolhido foi ${aleatorio}, quem começa atacando é o Montro: ${rennala.nome}!`);
-        perguntar("Aperte enter para receber ataque: \n");
-        rennala.atacar(personPrincipal);
-    }
-
-    while (personPrincipal.estaVivo() === true && rennala.estaVivo() === true) {
-        perguntar("\nAperte enter para jogar mais uma rodada: ");
-        if (aleatorio >= 50 && personPrincipal.estaVivo() === true && rennala.estaVivo() === true) {
-            boxEsquerda(`Vez do herói ${personPrincipal.nome}!`);
-            perguntar("Aperte enter para atacar: ")
-            personPrincipal.atacar(rennala);
-            aleatorio = 1;
-
-        } else if (aleatorio < 50 && personPrincipal.estaVivo() === true && rennala.estaVivo() === true) {
-            boxEsquerda(`Vez do monstro ${rennala.nome}`);
-            perguntar("Aperte enter para receber ataque: ");
-            rennala.atacar(personPrincipal);
-            aleatorio = 50;
-        }
-    }
-
-    if (!rennala.estaVivo()) {
-        const armaduraRennala = new Armadura("Armadura da Rainha", "Armadura poderosa da Rainha da Lua Cheia", 25);
-        const armaRennala = new Arma("Cajado de Rennala", "Cajado poderoso da Rainha da Lua Cheia", 12, "Lendária");
+      if (iniciarBatalha(personagem, rennala) === 'vitoria') {
+        personagem.inventario.push(new Armadura("Armadura da Rainha", "Armadura poderosa da Rainha da Lua Cheia", 25));
+        personagem.inventario.push(new Arma("Cajado de Rennala", "Cajado poderoso da Rainha da Lua Cheia", 12, "Lendária"));
+        personagem.equiparItem(personagem.inventario[personagem.inventario.length-2]);
+        personagem.equiparItem(personagem.inventario[personagem.inventario.length-1]);
+        console.log("Você recebeu a Armadura e Cajado da Rainha e os equipou!");
 
         box('VITÓRIA!');
-        perguntar("\nAperte enter para receber níveis: \n");
-        personPrincipal.ganharExperiencia(2500);
-        personPrincipal.exibirInformacoes();
+        perguntar("Aperte enter para receber experiência:\n");
+        personagem.ganharExperiencia(1500);
+        personagem.exibirInformacoes();
 
-        personPrincipal.inventario.push(armaduraRennala);        
-        personPrincipal.inventario.push(armaRennala);        
-        personPrincipal.equiparItem(armaduraRennala);
-        personPrincipal.equiparItem(armaRennala);
-        console.log("Você recebeu a Armadura da Rainha e a equipou!");
+        if (iniciarBatalha(personagem, radahn) === 'vitoria') {
+          personagem.inventario.push(new Armadura("Armadura Estelar", "Armadura suprema do Flagelo Estelar", 30));
+          personagem.inventario.push(new Arma("Arco Estelar", "Arco supremo do Flagelo Estelar, dano massivo a distância", 20, "Lendária"));
+          personagem.equiparItem(personagem.inventario[personagem.inventario.length-2]);
+          personagem.equiparItem(personagem.inventario[personagem.inventario.length-1]);
+          console.log("Você recebeu a Armadura e Arco Estelar e os equipou!");
 
-        const radahn = new Monstro("Radahn, Flagelo Estelar", 40, 200, 25, "Demigod");
-
-        box(`Batalha Final! ${personPrincipal.nome} X ${radahn.nome}`);
-        radahn.exibirInformacoes();
-        linha();
-        console.log("Quem atacará primeiro? [0-49 Herói | 50-100 Monstro]");
-        linha();
-        perguntar("Aperte enter para girar: ");
-
-        aleatorio = Math.round(Math.random() * 100);
-        if (aleatorio < 50) {
-            boxEsquerda(`O numero escolhido foi ${aleatorio}, quem começa atacando é o herói: ${personPrincipal.nome}!`);
-            perguntar("Aperte enter para atacar: \n");
-            personPrincipal.atacar(radahn);
-        } else if (aleatorio >= 50) {
-            boxEsquerda(`O numero escolhido foi ${aleatorio}, quem começa atacando é o Montro: ${radahn.nome}!`);
-            perguntar("Aperte enter para receber ataque: \n");
-            radahn.atacar(personPrincipal);
-        }
-
-        while (personPrincipal.estaVivo() === true && radahn.estaVivo() === true) {
-            perguntar("\nAperte enter para jogar mais uma rodada: ");
-            if (aleatorio >= 50 && personPrincipal.estaVivo() === true && radahn.estaVivo() === true) {
-                boxEsquerda(`Vez do herói ${personPrincipal.nome}!`);
-                perguntar("Aperte enter para atacar: ")
-                personPrincipal.atacar(radahn);
-                aleatorio = 1;
-
-            } else if (aleatorio < 50 && personPrincipal.estaVivo() === true && radahn.estaVivo() === true) {
-                boxEsquerda(`Vez do monstro ${radahn.nome}`);
-                perguntar("Aperte enter para receber ataque: ");
-                radahn.atacar(personPrincipal);
-                aleatorio = 50;
-            }
-        }
-
-        if (!radahn.estaVivo()) {
-            const armaduraRadahn = new Armadura("Armadura Estelar", "Armadura suprema do Flagelo Estelar", 30);
-            const armaRadahn = new Arma("Arco Estelar", "Arco supremo do Flagelo Estelar, dano massivo a distância", 20, "Lendária");
-            box('Parabéns você zerou o game');
-            perguntar("\nAperte enter para receber níveis: \n");
-            personPrincipal.ganharExperiencia(5000);
-            personPrincipal.exibirInformacoes();
-
-            personPrincipal.inventario.push(armaduraRadahn);
-            personPrincipal.inventario.push(armaRadahn);
-            personPrincipal.equiparItem(armaduraRadahn);
-            personPrincipal.equiparItem(armaRadahn);
-            console.log("Você recebeu a Armadura Estelar e a equipou!");
+          box('Parabéns, você zerou o game!');
+          perguntar("Aperte enter para receber experiência:\n");
+          personagem.ganharExperiencia(5000);
+          personagem.exibirInformacoes();
+          box('Fim de game!\nObrigado por jogar!');
         } else {
-            box('You loose, Wasted!');
-            console.log("\nJogue novamente para vencer!");
-            process.exit();
+          box('Você perdeu! Wasted!');
+          console.log("\nJogue novamente para vencer!");
+          process.exit();
         }
-
-    } else {
-        box('You loose, Wasted!');
+      } else {
+        box('Você perdeu! Wasted!');
         console.log("\nJogue novamente para vencer!");
         process.exit();
+      }
+    } else {
+      box('Você perdeu! Wasted!');
+      console.log("\nJogue novamente para vencer!");
+      process.exit();
     }
-} else {
-    box('You loose, Wasted!');
+  } else {
+    box('Você perdeu! Wasted!');
     console.log("\nJogue novamente para vencer!");
     process.exit();
+  }
 }
 
-box('Fim de game!\nObrigado por Jogar!');
-
-
-
-
-
-
-
-
-
+main();
