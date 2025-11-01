@@ -86,7 +86,7 @@ while (true) {
         break;
     }
 
-    const nome = readline.question('Insira o nome do seu personagem: ');
+    const nome = readline.question('Insira o seu Username: ');
     let personPrincipal = null;
 
 
