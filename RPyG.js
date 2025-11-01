@@ -72,7 +72,7 @@ function boxEsquerda(texto, largura = 80) {
 function perguntar(msg) {
   const resposta = readline.question(msg);
   if (resposta.toLowerCase() === "sair") {
-    console.log("\nJogo encerrado. Até a próxima!");
+    console.log("\nJogo encerrado. Ate a proxima!");
     process.exit();
   }
   return resposta;
@@ -90,7 +90,7 @@ function escolherClasse() {
 
   let escolha = parseInt(perguntar('Escolha sua classe [1 | 2 | 3]: '));
   while (![1, 2, 3].includes(escolha)) {
-    boxEsquerda('Número inválido, escolha apenas 1, 2 ou 3.');
+    boxEsquerda('Numero invalido, escolha apenas 1, 2 ou 3.');
     escolha = parseInt(perguntar('Escolha sua classe [1 | 2 | 3]: '));
   }
   return escolha;
@@ -126,7 +126,7 @@ function criarPersonagem(escolha, nome) {
 
 function exibirStatusPersonagem(personagem) {
   boxEsquerda(
-    `Parabéns, seu personagem inicial está pronto!\n` +
+    `Parabens, seu personagem inicial esta pronto!\n` +
     `Nome: ${personagem.nome}\n` +
     `Ataque: ${personagem.ataque}\n` +
     `Vida: ${personagem.vida}\n` +
@@ -138,24 +138,24 @@ function exibirStatusPersonagem(personagem) {
 function iniciarBatalha(jogador, inimigo) {
   box(`Batalha! ${jogador.nome} X ${inimigo.nome}`);
   inimigo.exibirInformacoes();
-  boxEsquerda("Quem atacará primeiro? [0-49 Herói | 50-100 Monstro]");
+  boxEsquerda("Quem atacara primeiro? [0-49 Heroi | 50-100 Monstro]");
   perguntar("Aperte enter para girar: ");
 
   let vez = Math.round(Math.random() * 100);
   if (vez < 50) {
-    boxEsquerda(`Número sorteado: ${vez}, começa atacando o herói: ${jogador.nome}!`);
+    boxEsquerda(`Numero sorteado: ${vez}, começa atacando o heroi: ${jogador.nome}!`);
     perguntar("Aperte enter para atacar: ");
     jogador.atacar(inimigo);
   } else {
-    boxEsquerda(`Número sorteado: ${vez}, começa atacando o monstro: ${inimigo.nome}!`);
+    boxEsquerda(`Numero sorteado: ${vez}, começa atacando o monstro: ${inimigo.nome}!`);
     perguntar("Aperte enter para receber ataque: ");
     inimigo.atacar(jogador);
   }
 
   while (jogador.estaVivo() && inimigo.estaVivo()) {
-    perguntar("\nAperte enter para a próxima rodada: ");
+    perguntar("\nAperte enter para a proxima rodada: ");
     if (vez >= 50) {
-      boxEsquerda(`Vez do herói ${jogador.nome}!`);
+      boxEsquerda(`Vez do heroi ${jogador.nome}!`);
       perguntar("Aperte enter para atacar: ");
       jogador.atacar(inimigo);
       vez = 1;
@@ -186,67 +186,67 @@ async function main() {
 
   exibirStatusPersonagem(personagem);
 
-  boxEsquerda(`Bem vindo ${personagem.nome}, está preparado para a primeira luta? \nEu não ligo se não estiver, vamos começar!`);
+  boxEsquerda(`Bem vindo ${personagem.nome}, esta preparado para a primeira luta? \nEu não ligo se não estiver, vamos começar!`);
 
   if (iniciarBatalha(personagem, margit) === 'vitoria') {
-    box('VITÓRIA!');
-    perguntar("Aperte enter para receber experiência:\n");
+    box('VIToRIA!');
+    perguntar("Aperte enter para receber experiencia:\n");
     personagem.ganharExperiencia(750);
     personagem.exibirInformacoes();
 
     if (iniciarBatalha(personagem, godrick) === 'vitoria') {
-      personagem.inventario.push(new Armadura("Armadura de Godrick", "Armadura lendária do Godrick, alta defesa", 20));
-      personagem.inventario.push(new Arma("Espada de Godrick", "Espada lendária de Godrick com grande poder de ataque", 15, "Lendária"));
+      personagem.inventario.push(new Armadura("Armadura de Godrick", "Armadura lendaria do Godrick, alta defesa", 20));
+      personagem.inventario.push(new Arma("Espada de Godrick", "Espada lendaria de Godrick com grande poder de ataque", 15, "Lendaria"));
       personagem.equiparItem(personagem.inventario[personagem.inventario.length-2]);
       personagem.equiparItem(personagem.inventario[personagem.inventario.length-1]);
-      console.log("Você recebeu a Armadura e Espada de Godrick e as equipou!");
+      console.log("Voce recebeu a Armadura e Espada de Godrick e as equipou!");
 
-      box('VITÓRIA!');
-      perguntar("Aperte enter para receber experiência:\n");
+      box('VIToRIA!');
+      perguntar("Aperte enter para receber experiencia:\n");
       personagem.ganharExperiencia(1000);
       personagem.exibirInformacoes();
 
       if (iniciarBatalha(personagem, rennala) === 'vitoria') {
         personagem.inventario.push(new Armadura("Armadura da Rainha", "Armadura poderosa da Rainha da Lua Cheia", 25));
-        personagem.inventario.push(new Arma("Cajado de Rennala", "Cajado poderoso da Rainha da Lua Cheia", 12, "Lendária"));
+        personagem.inventario.push(new Arma("Cajado de Rennala", "Cajado poderoso da Rainha da Lua Cheia", 12, "Lendaria"));
         personagem.equiparItem(personagem.inventario[personagem.inventario.length-2]);
         personagem.equiparItem(personagem.inventario[personagem.inventario.length-1]);
-        console.log("Você recebeu a Armadura e Cajado da Rainha e os equipou!");
+        console.log("Voce recebeu a Armadura e Cajado da Rainha e os equipou!");
 
-        box('VITÓRIA!');
-        perguntar("Aperte enter para receber experiência:\n");
+        box('VIToRIA!');
+        perguntar("Aperte enter para receber experiencia:\n");
         personagem.ganharExperiencia(1500);
         personagem.exibirInformacoes();
 
         if (iniciarBatalha(personagem, radahn) === 'vitoria') {
           personagem.inventario.push(new Armadura("Armadura Estelar", "Armadura suprema do Flagelo Estelar", 30));
-          personagem.inventario.push(new Arma("Arco Estelar", "Arco supremo do Flagelo Estelar, dano massivo a distância", 20, "Lendária"));
+          personagem.inventario.push(new Arma("Arco Estelar", "Arco supremo do Flagelo Estelar, dano massivo a distância", 20, "Lendaria"));
           personagem.equiparItem(personagem.inventario[personagem.inventario.length-2]);
           personagem.equiparItem(personagem.inventario[personagem.inventario.length-1]);
-          console.log("Você recebeu a Armadura e Arco Estelar e os equipou!");
+          console.log("Voce recebeu a Armadura e Arco Estelar e os equipou!");
 
-          box('Parabéns, você zerou o game!');
-          perguntar("Aperte enter para receber experiência:\n");
+          box('Parabens, voce zerou o game!');
+          perguntar("Aperte enter para receber experiencia:\n");
           personagem.ganharExperiencia(5000);
           personagem.exibirInformacoes();
           box('Fim de game!\nObrigado por jogar!');
         } else {
-          box('Você perdeu! Wasted!');
+          box('Voce perdeu! Wasted!');
           console.log("\nJogue novamente para vencer!");
           process.exit();
         }
       } else {
-        box('Você perdeu! Wasted!');
+        box('Voce perdeu! Wasted!');
         console.log("\nJogue novamente para vencer!");
         process.exit();
       }
     } else {
-      box('Você perdeu! Wasted!');
+      box('Voce perdeu! Wasted!');
       console.log("\nJogue novamente para vencer!");
       process.exit();
     }
   } else {
-    box('Você perdeu! Wasted!');
+    box('Voce perdeu! Wasted!');
     console.log("\nJogue novamente para vencer!");
     process.exit();
   }
