@@ -2,7 +2,7 @@ import Heroi from './personagens/heroi.js';
 import Monstro from './personagens/monstro.js';
 import Arma from './itens/arma.js';
 
-const heroi = new Heroi('João');
+const heroi = new Heroi();
 const espada = new Arma('Espada de Ferro', 3, 7);
 heroi.arma = espada;
 
