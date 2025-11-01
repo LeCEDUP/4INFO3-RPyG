@@ -90,7 +90,7 @@ while (true) {
     let personPrincipal = null;
 
 
-    // console.clear();
+    console.clear();
 
     if (escolhaDeClasse === 1) {
         console.log("=== História de Gandalf ===\n");
@@ -207,11 +207,11 @@ while (true) {
             console.log("Pois em cada coração valente, a chama da esperança nunca se apaga.\n");
         }
 
-        readline.question("Pressione ENTER para o ethb53y53htypílogo final...\n");
+        readline.question("Pressione ENTER para o epílogo final...\n");
 
 
 
-        // console.clear();
+        console.clear();
         console.log("=== O DESTINO DE ELDOR ===\n");
         console.log("Após incontáveis batalhas e jornadas pelas ruínas esquecidas, o nome do herói ecoa em cada canto de Eldor.");
         console.log("As sombras se dissipam, e uma nova aurora surge sobre as montanhas distantes.");
