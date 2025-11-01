@@ -38,6 +38,12 @@ export class Personagem {
     estaVivo() {
         return this.vida > 0;
     };
+
+Armar(alvo,ataque){
+    let dano = Math.max(0, ataque - alvo.defesa);
+    alvo.receberDano(dano);
+    console.log(`${this.nome} atacou ${alvo.nome} causando ${dano} de dano.`);
+};
 }
 
 
