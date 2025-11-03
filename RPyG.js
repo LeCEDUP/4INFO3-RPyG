@@ -3,6 +3,7 @@ import { Heroi } from "./personagens/heroi.js";
 import { Arma } from "./itens/arma.js";
 import { Armadura } from "./itens/armadura.js";
 import { Monstro } from "./personagens/monstro.js";
+import { Item } from './itens/item.js';
 
 let heroi = new Heroi("Migs o Escolhido", 100, 15, 5);
 let demonio = new Monstro("Gomes Aterrorizante", 130, 8, 2, "Grande");
@@ -63,12 +64,12 @@ console.log(formatarAcao(`🎒 ${heroi.nome} encontrou itens: ${espada.nome}, ${
 heroi.equiparItem(espada);
 heroi.equiparItem(escudo);
 
-criarCabecalho("🚨 ENCONTRO ALEATÓRIO: GOBLIN 🚨", cor.fundoVermelho, cor.branco);
+criarCabecalho("🚨 ENCONTRO ALEATÓRIO: pulga 🚨", cor.fundoVermelho, cor.branco);
 
-console.log(formatarAcao(`🎯 INÍCIO DA BATALHA CONTRA O ${goblin.nome.toUpperCase()}!`, cor.amarelo));
-heroi.atacar(goblin);
-goblin.atacar(heroi);
-heroi.atacar(goblin);
+console.log(formatarAcao(`🎯 INÍCIO DA BATALHA CONTRA O ${pulga.nome.toUpperCase()}!`, cor.amarelo));
+heroi.atacar(pulga);
+pulga.atacar(heroi);
+heroi.atacar(pulga);
 
 if (heroi.estaVivo()) {
   criarCabecalho("✅ VITÓRIA! ✅", cor.fundoVerde, cor.branco);
@@ -80,24 +81,24 @@ if (heroi.estaVivo()) {
 }
 
 criarCabecalho("⚗️ MOMENTO DE CURA ⚗️", cor.fundoCiano, cor.branco);
-heroi.usarItem(pocaoVida);
+heroi.equiparItem(pocaoVida);
 
 
 criarCabecalho("🔥 DESAFIO FINAL: DRAGÃO ANCESTRAL 🔥", cor.fundoMagenta, cor.branco);
 
-console.log(formatarAcao(`🐉 O temível ${dragao.nome.toUpperCase()} surge!`, cor.amarelo));
-heroi.atacar(dragao);
-dragao.atacar(heroi);
-heroi.atacar(dragao);
+console.log(formatarAcao(`🐉 O temível ${demonio.nome.toUpperCase()} surge!`, cor.amarelo));
+heroi.atacar(demonio);
+demonio.atacar(heroi);
+heroi.atacar(demonio);
 
 
 if (heroi.estaVivo()) {
   criarCabecalho("🏆 PARABÉNS, HERÓI! 🏆", cor.fundoAmarelo, cor.branco);
-  console.log(formatarAcao(`👑 ${heroi.nome} derrotou o ${dragao.nome} e salvou o reino!`, cor.verde));
+  console.log(formatarAcao(`👑 ${heroi.nome} derrotou o ${demonio.nome} e salvou o reino!`, cor.verde));
   heroi.ganhoExperiencia(200);
 } else {
   criarCabecalho("💀 FIM DE JOGO 💀", cor.fundoVermelho, cor.branco);
-  console.log(formatarAcao(`⚰️ ${heroi.nome} foi derrotado pelo ${dragao.nome}.`, cor.vermelho));
+  console.log(formatarAcao(`⚰️ ${heroi.nome} foi derrotado pelo ${demonio.nome}.`, cor.vermelho));
 }
 
 criarCabecalho("FIM DA AVENTURA", cor.fundoAzul, cor.branco);

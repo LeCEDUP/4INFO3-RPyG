@@ -3,7 +3,7 @@ import { Personagem } from "./personagem.js";
 import { Arma } from "../itens/arma.js";
 import { Armadura } from "../itens/armadura.js";
 
-class Heroi extends Personagem {
+export class Heroi extends Personagem {
     constructor(nome, vida, ataque, defesa, nivel = 1, experiencia = 0, inventario = []) {
         super(nome, vida, ataque, defesa);
         
@@ -12,14 +12,14 @@ class Heroi extends Personagem {
         this.inventario = inventario; 
     }
 
-    ganhar_experiencia(exp){
+    ganhoExperiencia(exp){
         this.experiencia += exp
         console.log(`${this.nome} ganhou ${exp} de experiência. Total: ${this.experiencia}`)
         while (this.experiencia >= this.nivel * 100){ 
-            this.subir_nivel()}
+            this.subirNivel()}
     }
 
-    subir_nivel(){
+    subirNivel(){
         this.nivel += 1
         this.vida += 20
         this.ataque += 5
