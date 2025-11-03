@@ -1,25 +1,19 @@
-// RPyG.js
-import readline from "readline";
+import * as rl from 'readline-sync';
 import Heroi from "./personagens/heroi.js";
 import Monstro from "./personagens/monstro.js";
 import Arma from "./itens/arma.js";
 import Armadura from "./itens/armadura.js";
 
-// === SETUP DO CONSOLE ===
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
 
 let heroi = null;
 
 // === MONSTROS ALEATÓRIOS ===
 function gerarMonstro() {
   const tipos = [
-    new Monstro("Medusa", "Grande", 40, 8, 2),
-    new Monstro("Creeper", "Médio", 35, 10, 1),
-    new Monstro("Slime", "Médio", 70, 12, 3),
-    new Monstro("Esqueleto", "Grande", 120, 18, 5)
+    new Monstro("Creeper", "Pequeno", 40, 16, 2),
+    new Monstro("Zombie", "Pequeno", 35, 20, 1),
+    new Monstro("Enderman", "Médio", 70, 24, 3),
+    new Monstro("Herobrine", "Grande", 150, 36, 5)
   ];
 
   return tipos[Math.floor(Math.random() * tipos.length)];
@@ -30,7 +24,13 @@ function batalha(monstro) {
   console.log(`\n🔥 Um ${monstro.nome} apareceu!`);
 
   let turno = 1;
-  while (heroi.estaVivo() && monstro.estaVivo()) {
+  let sair = false;
+  while (heroi.estaVivo() && monstro.estaVivo() && !sair) {
+    sair = rl.question("\nPressione ENTER para continuar a batalha ou digite 'q' para fugir: ") === "q";
+    if (sair) {
+      console.log(`${heroi.nome} fugiu da batalha!`);
+      break;
+    }
     console.log(`\n--- Turno ${turno} ---`);
 
     const resHeroi = heroi.atacar(monstro);
@@ -100,49 +100,46 @@ function menu() {
 =========================
 `);
 
-  rl.question("Escolha uma opção: ", (op) => {
-    switch (op) {
-      case "1":
-        mostrarStatus();
-        break;
+  let op = rl.question("Escolha uma opção: ");
+  switch (op) {
+    case "1":
+      mostrarStatus();
+      break;
 
-      case "2":
-        mostrarInventario();
-        break;
+    case "2":
+      mostrarInventario();
+      break;
 
-      case "3":
-        explorar();
-        break;
+    case "3":
+      explorar();
+      break;
 
-      case "4":
-        console.log("Saindo do jogo...");
-        process.exit();
+    case "4":
+      console.log("Saindo do jogo...");
+      process.exit();
 
-      default:
-        console.log("Opção inválida!");
-    }
-    menu();
-  });
+    default:
+      console.log("Opção inválida!");
+  }
+  menu();
 }
-
 
 // === INICIALIZAÇÃO DO JOGO ===
 function iniciarJogo() {
-  rl.question("Digite o nome do seu herói: ", (nome) => {
-    heroi = new Heroi(nome);
+  let nome = rl.question("Digite o nome do seu herói: ");
+  heroi = new Heroi(nome);
 
-    // Itens iniciais
-    const espada = new Arma("Espada de Diamante", "Avançada, mas útil", 5);
-    const couraca = new Armadura("Armadura de Ouro", "Proteção Média", 3);
+  // Itens iniciais
+  const espada = new Arma("Espada de Dima", "Avançada, mas útil", 5);
+  const couraca = new Armadura("Armadura de Ouro", "Proteção básica", 3);
 
-    heroi.adicionarAoInventario(espada);
-    heroi.adicionarAoInventario(couraca);
-    heroi.equiparItem(espada);
-    heroi.equiparItem(couraca);
+  heroi.adicionarAoInventario(espada);
+  heroi.adicionarAoInventario(couraca);
+  heroi.equiparItem(espada);
+  heroi.equiparItem(couraca);
 
-    console.log(`\nHerói criado: ${heroi.nome}! A aventura começa...\n`);
-    menu();
-  });
+  console.log(`\nHerói criado: ${heroi.nome}! A aventura começa...\n`);
+  menu();
 }
 
 iniciarJogo();
