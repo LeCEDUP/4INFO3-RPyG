@@ -21,7 +21,7 @@ export class Personagem {
           else {
             console.log(`${this.nome} recebeu ${dano} de dano. Vida restante: ${this.vida}`)}
     }
-    esta_vivo(this){
+    esta_vivo(){
         return this.vida >0
     }
     

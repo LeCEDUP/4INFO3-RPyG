@@ -19,7 +19,7 @@ class Heroi extends Personagem {
             this.subir_nivel()}
     }
 
-    subir_nivel(this){
+    subir_nivel(){
         this.nivel += 1
         this.vida += 20
         this.ataque += 5
