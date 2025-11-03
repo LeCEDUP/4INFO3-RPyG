@@ -2,9 +2,9 @@
 import { Item } from './item.js';
 
 export class Armadura extends Item {
-    constructor (nome, descricao, bonus_defesa){
+    constructor (nome, descricao, bonusDefesa){
         super(nome, descricao);
 
-        this.bonus_defesa = bonus_defesa;
+        this.bonusDefesa = bonusDefesa;
     }
 }
