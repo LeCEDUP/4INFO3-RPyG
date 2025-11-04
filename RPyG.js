@@ -1,4 +1,4 @@
-import * as rl from 'readline-sync';
+import * as rl from "readline-sync";
 import Heroi from "./personagens/heroi.js";
 import Monstro from "./personagens/monstro.js";
 import Arma from "./itens/arma.js";
