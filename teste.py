@@ -5,6 +5,7 @@ from personagens.heroi import Heroi
 from personagens.monstro import Monstro
 
 
+
 # Criando personagens
 heroi = Heroi("Arthur", 100, 15, 5)
 goblin = Monstro("Goblin", 30, 8, 2, "Pequeno")
